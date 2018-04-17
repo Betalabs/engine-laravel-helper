@@ -15,7 +15,7 @@ This package provides essential functionalities to work with Engine apps on Lara
 - Laravel 5.6
 - Passport 6.0+
 
-## Install
+## Installation
 
 1) Install the package via composer
 
