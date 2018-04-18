@@ -62,7 +62,25 @@ public function boot()
 }
 ```
 
-5) And finally
+5) In your `config/auth.php` configuration file, you should set the driver option of the api authentication guard to passport and the users provider model to our Company model.
+This will instruct your application to use Passport's TokenGuard when authenticating incoming API requests:
+
+```php
+'guards' => [
+    'api' => [
+        'driver' => 'passport',
+        'provider' => 'users',
+    ],
+],
+'providers' => [
+    'users' => [
+        'driver' => 'eloquent',
+        'model' => \Betalabs\LaravelHelper\Models\Company::class,
+    ],
+],
+```
+
+6) And finally
 
 ```bash
 $ php artisan app:deploy
