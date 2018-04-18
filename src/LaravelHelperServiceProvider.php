@@ -7,6 +7,11 @@ use Illuminate\Support\ServiceProvider;
 
 class LaravelHelperServiceProvider extends ServiceProvider
 {
+    /**
+     * Perform post-registration booting of services.
+     *
+     * @return void
+     */
     public function boot()
     {
         $this->publishes([
@@ -17,13 +22,5 @@ class LaravelHelperServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands(Deploy::class);
         }
-    }
-
-    public function register()
-    {
-        $this->mergeConfigFrom(
-            realpath(__DIR__ . '/../config/auth.php'),
-            'auth'
-        );
     }
 }
