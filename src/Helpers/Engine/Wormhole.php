@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Helpers\Engine;
+namespace Betalabs\LaravelHelper\Helpers\Engine;
 
 
 use Illuminate\Support\Facades\Auth;
