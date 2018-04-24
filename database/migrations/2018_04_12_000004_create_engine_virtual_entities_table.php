@@ -25,7 +25,7 @@ class CreateEngineVirtualEntitiesTable extends Migration
                 ->on('companies');
             $table->foreign('type_id')
                 ->references('id')
-                ->on('engine_virtual_entity_type');
+                ->on('engine_virtual_entity_types');
         });
     }
 
