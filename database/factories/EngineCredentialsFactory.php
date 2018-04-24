@@ -6,8 +6,8 @@ $factory->define(\Betalabs\LaravelHelper\Models\EngineCredential::class,
     function (Faker $faker) {
         return [
             'client_id' => $faker->randomNumber(),
-            'client_secret' => $faker->text,
-            'username' => $faker->userName,
+            'client_secret' => $faker->password,
+            'username' => $faker->unique()->email,
             'password' => $faker->password,
         ];
     }
