@@ -21,7 +21,7 @@ class VirtualEntity
         VirtualEntityType $type
     ): string {
         $virtualEntity = EngineVirtualEntity::where('company_id', $company->id)
-            ->where('type', $type->getValue())->first();
+            ->where('type_id', $type->getValue())->first();
         return "virtual-entities/{$virtualEntity->code}/records";
     }
 }

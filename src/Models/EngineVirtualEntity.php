@@ -12,7 +12,7 @@ class EngineVirtualEntity extends Model
      */
     protected $fillable = [
         'code',
-        'type',
+        'type_id',
     ];
 
     /**
@@ -23,5 +23,15 @@ class EngineVirtualEntity extends Model
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
+    }
+
+    /**
+     * Return the related Engine virtual entity type.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function engineVirtualEntityType(): BelongsTo
+    {
+        return $this->belongsTo(EngineVirtualEntityType::class, 'type_id');
     }
 }

@@ -23,8 +23,21 @@ class FactoryTest extends TestCase
         ]);
 
         $this->assertDatabaseHas('companies', $company->toArray());
-        $this->assertDatabaseHas('app_configurations', $appConfig->toArray());
-        $this->assertDatabaseHas('engine_credentials', $credential->toArray());
-        $this->assertDatabaseHas('engine_virtual_entities', $virtualEntity->toArray());
+        $this->assertDatabaseHas(
+            'app_configurations',
+            $appConfig->toArray()
+        );
+        $this->assertDatabaseHas(
+            'engine_credentials',
+            $credential->toArray()
+        );
+        $this->assertDatabaseHas(
+            'engine_virtual_entities',
+            $virtualEntity->toArray()
+        );
+        $this->assertDatabaseHas(
+            'engine_virtual_entity_types',
+            $virtualEntity->engineVirtualEntityType->toArray()
+        );
     }
 }

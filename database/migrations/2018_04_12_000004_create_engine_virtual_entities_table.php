@@ -17,13 +17,15 @@ class CreateEngineVirtualEntitiesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('company_id');
             $table->string('code')->index();
-            $table->enum('type', ['product', 'shipping_company'])
-                ->index();
+            $table->unsignedInteger('type_id');
             $table->timestamps();
 
             $table->foreign('company_id')
                 ->references('id')
                 ->on('companies');
+            $table->foreign('type_id')
+                ->references('id')
+                ->on('engine_virtual_entity_type');
         });
     }
 
@@ -36,6 +38,7 @@ class CreateEngineVirtualEntitiesTable extends Migration
     {
         Schema::table('engine_virtual_entities', function (Blueprint $table) {
             $table->dropForeign(['company_id']);
+            $table->dropForeign(['type_id']);
         });
 
         Schema::dropIfExists('engine_virtual_entities');
