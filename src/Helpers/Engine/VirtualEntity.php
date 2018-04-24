@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Betalabs\LaravelHelper\Helpers\Engine;
-
 
 use Betalabs\LaravelHelper\Models\EngineVirtualEntity;
 use Betalabs\LaravelHelper\Models\Enums\EngineVirtualEntity as VirtualEntityType;

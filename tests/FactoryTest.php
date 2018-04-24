@@ -2,7 +2,6 @@
 
 namespace Tests;
 
-
 use Betalabs\LaravelHelper\Models\AppConfiguration;
 use Betalabs\LaravelHelper\Models\Company;
 use Betalabs\LaravelHelper\Models\EngineCredential;
@@ -21,13 +20,6 @@ class FactoryTest extends TestCase
         ]);
         $virtualEntity = factory(EngineVirtualEntity::class)->create([
             'company_id' => $company->id
-        ]);
-
-        dd([
-            $company->toArray(),
-            $appConfig->toArray(),
-            $credential->toArray(),
-            $virtualEntity->toArray()
         ]);
 
         $this->assertDatabaseHas('companies', $company->toArray());
