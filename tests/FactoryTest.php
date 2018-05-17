@@ -4,32 +4,24 @@ namespace Betalabs\LaravelHelper\Tests;
 
 use Betalabs\LaravelHelper\Models\EngineRegistry;
 use Betalabs\LaravelHelper\Models\Tenant;
-use Betalabs\LaravelHelper\Models\EngineCredential;
 use Betalabs\LaravelHelper\Models\EngineVirtualEntity;
 
 class FactoryTest extends TestCase
 {
     public function testCanRunFactories()
     {
-        $company = factory(Tenant::class)->create();
-        $appConfig = factory(EngineRegistry::class)->create([
-            'company_id' => $company->id
-        ]);
-        $credential = factory(EngineCredential::class)->create([
-            'company_id' => $company->id
+        $tenant = factory(Tenant::class)->create();
+        $engineRegistry = factory(EngineRegistry::class)->create([
+            'tenant_id' => $tenant->id
         ]);
         $virtualEntity = factory(EngineVirtualEntity::class)->create([
-            'company_id' => $company->id
+            'tenant_id' => $tenant->id
         ]);
 
-        $this->assertDatabaseHas('companies', $company->toArray());
+        $this->assertDatabaseHas('tenants', $tenant->toArray());
         $this->assertDatabaseHas(
-            'app_configurations',
-            $appConfig->toArray()
-        );
-        $this->assertDatabaseHas(
-            'engine_credentials',
-            $credential->toArray()
+            'engine_registries',
+            $engineRegistry->toArray()
         );
         $this->assertDatabaseHas(
             'engine_virtual_entities',

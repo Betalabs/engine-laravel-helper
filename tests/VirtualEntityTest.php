@@ -10,13 +10,13 @@ use Betalabs\LaravelHelper\Models\Enums\EngineVirtualEntity as EntityType;
 
 class VirtualEntityTest extends TestCase
 {
-    private $company;
+    private $tenant;
 
     protected function setUp()
     {
         parent::setUp();
 
-        $this->company = factory(Tenant::class)->create();
+        $this->tenant = factory(Tenant::class)->create();
     }
 
     public function testProductResource()
@@ -25,13 +25,13 @@ class VirtualEntityTest extends TestCase
             'name' => 'Product'
         ]);
         $virtualEntity = factory(EngineVirtualEntity::class)->create([
-            'company_id' => $this->company->id,
+            'tenant_id' => $this->tenant->id,
             'type_id' => $entityType->id
         ]);
 
         $type = new EntityType(EntityType::PRODUCT);
 
-        $resource = VirtualEntity::resource($this->company, $type);
+        $resource = VirtualEntity::resource($this->tenant, $type);
         $expectedResource = "virtual-entities/{$virtualEntity->code}/records";
 
         $this->assertEquals($expectedResource, $resource);
@@ -44,13 +44,13 @@ class VirtualEntityTest extends TestCase
             'name' => 'Shipping company'
         ]);
         $virtualEntity = factory(EngineVirtualEntity::class)->create([
-            'company_id' => $this->company->id,
+            'tenant_id' => $this->tenant->id,
             'type_id' => $entityType->id
         ]);
 
         $type = new EntityType(EntityType::SHIPPING_COMPANY);
 
-        $resource = VirtualEntity::resource($this->company, $type);
+        $resource = VirtualEntity::resource($this->tenant, $type);
         $expectedResource = "virtual-entities/{$virtualEntity->code}/records";
 
         $this->assertEquals($expectedResource, $resource);

@@ -7,7 +7,7 @@ use Betalabs\LaravelHelper\Http\Requests\UpdateTenant;
 use Betalabs\LaravelHelper\Models\Tenant;
 use Laravel\Passport\Passport;
 
-class CompanyControllerTest extends TestCase
+class TenantControllerTest extends TestCase
 {
     protected function setUp()
     {
@@ -23,8 +23,6 @@ class CompanyControllerTest extends TestCase
         $company = $resource['resource']->toArray();
 
         $this->assertArrayHasKey('name', $company);
-        $this->assertArrayHasKey('trading_name', $company);
-        $this->assertArrayHasKey('cnpj', $company);
         $this->assertArrayHasKey('email', $company);
     }
 
@@ -41,8 +39,6 @@ class CompanyControllerTest extends TestCase
 
         $this->assertNotEquals($oldCompany['email'], $newCompany['email']);
         $this->assertArrayHasKey('name', $newCompany);
-        $this->assertArrayHasKey('trading_name', $newCompany);
-        $this->assertArrayHasKey('cnpj', $newCompany);
         $this->assertArrayHasKey('email', $newCompany);
     }
 
