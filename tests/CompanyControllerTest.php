@@ -1,10 +1,10 @@
 <?php
 
-namespace Tests;
+namespace Betalabs\LaravelHelper\Tests;
 
-use Betalabs\LaravelHelper\Http\Controllers\CompanyController;
-use Betalabs\LaravelHelper\Http\Requests\UpdateCompany;
-use Betalabs\LaravelHelper\Models\Company;
+use Betalabs\LaravelHelper\Http\Controllers\TenantController;
+use Betalabs\LaravelHelper\Http\Requests\UpdateTenant;
+use Betalabs\LaravelHelper\Models\Tenant;
 use Laravel\Passport\Passport;
 
 class CompanyControllerTest extends TestCase
@@ -13,12 +13,12 @@ class CompanyControllerTest extends TestCase
     {
         parent::setUp();
 
-        Passport::actingAs(factory(Company::class)->create());
+        Passport::actingAs(factory(Tenant::class)->create());
     }
 
     public function testShow()
     {
-        $controller = new CompanyController();
+        $controller = new TenantController();
         $resource = (array)$controller->show();
         $company = $resource['resource']->toArray();
 
@@ -32,7 +32,7 @@ class CompanyControllerTest extends TestCase
     {
         $request = $this->mockRequest();
 
-        $controller = new CompanyController();
+        $controller = new TenantController();
         $oldResource = (array)$controller->show();
         $oldCompany = $oldResource['resource']->toArray();
 
@@ -48,13 +48,13 @@ class CompanyControllerTest extends TestCase
 
     private function mockRequest()
     {
-        $request = $this->getMockBuilder(UpdateCompany::class)
+        $request = $this->getMockBuilder(UpdateTenant::class)
             ->disableOriginalConstructor()
             ->setMethods(['input'])
             ->getMock();
         $request->expects($this->once())
             ->method('input')
-            ->willReturn(factory(Company::class)->raw());
+            ->willReturn(factory(Tenant::class)->raw());
         return $request;
     }
 }

@@ -24,7 +24,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Betalabs\\LaravelHelper\\Tests\\": "tests/"
         }
     },
     "extra": {

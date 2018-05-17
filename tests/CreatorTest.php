@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests;
+namespace Betalabs\LaravelHelper\Tests;
 
-use Betalabs\LaravelHelper\Models\Company;
-use Betalabs\LaravelHelper\Services\Company\Creator;
+use Betalabs\LaravelHelper\Models\Tenant;
+use Betalabs\LaravelHelper\Services\Tenant\Creator;
 
 class CreatorTest extends TestCase
 {
@@ -18,10 +18,10 @@ class CreatorTest extends TestCase
     public function testCreate()
     {
         $service = new Creator();
-        $service->setCompanyData(factory(Company::class)->raw());
+        $service->setData(factory(Tenant::class)->raw());
         $company = $service->create();
 
-        $this->assertInstanceOf(Company::class, $company);
+        $this->assertInstanceOf(Tenant::class, $company);
         $this->assertNotEmpty($company->name);
         $this->assertNotEmpty($company->email);
         $this->assertNotEmpty($company->accessToken);

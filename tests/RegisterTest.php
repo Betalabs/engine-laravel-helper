@@ -1,13 +1,12 @@
 <?php
 
-namespace Tests;
+namespace Betalabs\LaravelHelper\Tests;
 
-
-use Betalabs\LaravelHelper\Models\AppConfiguration;
-use Betalabs\LaravelHelper\Models\Company;
+use Betalabs\LaravelHelper\Models\EngineRegistry;
+use Betalabs\LaravelHelper\Models\Tenant;
 use Betalabs\LaravelHelper\Models\EngineCredential;
 use Betalabs\LaravelHelper\Services\App\Register;
-use Betalabs\LaravelHelper\Services\Company\Creator;
+use Betalabs\LaravelHelper\Services\Tenant\Creator;
 
 class RegisterTest extends TestCase
 {
@@ -17,8 +16,8 @@ class RegisterTest extends TestCase
 
         $service = new Register($creator);
         $service->setAppData([
-            'company' => factory(Company::class)->raw(),
-            'app_configuration' => factory(AppConfiguration::class)->raw(),
+            'company' => factory(Tenant::class)->raw(),
+            'app_configuration' => factory(EngineRegistry::class)->raw(),
             'engine_credential' => factory(EngineCredential::class)->raw(),
         ]);
         $company = $service->registration();
@@ -44,7 +43,7 @@ class RegisterTest extends TestCase
             ->willReturn(null);
         $creator->expects($this->once())
             ->method('create')
-            ->willReturn(factory(Company::class)->create());
+            ->willReturn(factory(Tenant::class)->create());
         return $creator;
     }
 }

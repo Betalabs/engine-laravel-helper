@@ -1,8 +1,8 @@
 <?php
 
-namespace Tests;
+namespace Betalabs\LaravelHelper\Tests;
 
-use Betalabs\LaravelHelper\Models\Company;
+use Betalabs\LaravelHelper\Models\Tenant;
 use Carbon\Carbon;
 
 class MigrateDatabaseTest extends TestCase
@@ -11,7 +11,7 @@ class MigrateDatabaseTest extends TestCase
     {
         $now = Carbon::now();
 
-        Company::create([
+        Tenant::create([
             'name' => 'Test Corp',
             'trading_name' => 'Test',
             'email' => 'test@test.com',
@@ -20,7 +20,7 @@ class MigrateDatabaseTest extends TestCase
             'updated_at' => $now
         ]);
 
-        $company = Company::where('id', 1)->first();
+        $company = Tenant::where('id', 1)->first();
         $companyArr = $company->toArray();
 
         $this->assertEquals('Test Corp', $company->name);

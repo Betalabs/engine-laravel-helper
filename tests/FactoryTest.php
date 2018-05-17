@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests;
+namespace Betalabs\LaravelHelper\Tests;
 
-use Betalabs\LaravelHelper\Models\AppConfiguration;
-use Betalabs\LaravelHelper\Models\Company;
+use Betalabs\LaravelHelper\Models\EngineRegistry;
+use Betalabs\LaravelHelper\Models\Tenant;
 use Betalabs\LaravelHelper\Models\EngineCredential;
 use Betalabs\LaravelHelper\Models\EngineVirtualEntity;
 
@@ -11,8 +11,8 @@ class FactoryTest extends TestCase
 {
     public function testCanRunFactories()
     {
-        $company = factory(Company::class)->create();
-        $appConfig = factory(AppConfiguration::class)->create([
+        $company = factory(Tenant::class)->create();
+        $appConfig = factory(EngineRegistry::class)->create([
             'company_id' => $company->id
         ]);
         $credential = factory(EngineCredential::class)->create([

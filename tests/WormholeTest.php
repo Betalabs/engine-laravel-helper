@@ -1,10 +1,10 @@
 <?php
 
-namespace Tests;
+namespace Betalabs\LaravelHelper\Tests;
 
 use Betalabs\LaravelHelper\Helpers\Engine\Wormhole;
-use Betalabs\LaravelHelper\Models\AppConfiguration;
-use Betalabs\LaravelHelper\Models\Company;
+use Betalabs\LaravelHelper\Models\EngineRegistry;
+use Betalabs\LaravelHelper\Models\Tenant;
 use Laravel\Passport\Passport;
 
 class WormholeTest extends TestCase
@@ -15,9 +15,9 @@ class WormholeTest extends TestCase
     {
         parent::setUp();
 
-        $company = factory(Company::class)->create();
+        $company = factory(Tenant::class)->create();
         Passport::actingAs($company);
-        $this->appConfig = factory(AppConfiguration::class)->create([
+        $this->appConfig = factory(EngineRegistry::class)->create([
             'company_id' => $company->id
         ]);
     }

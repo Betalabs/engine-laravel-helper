@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests;
+namespace Betalabs\LaravelHelper\Tests;
 
 use Betalabs\LaravelHelper\Helpers\Engine\VirtualEntity;
-use Betalabs\LaravelHelper\Models\Company;
+use Betalabs\LaravelHelper\Models\Tenant;
 use Betalabs\LaravelHelper\Models\EngineVirtualEntity;
 use Betalabs\LaravelHelper\Models\EngineVirtualEntityType;
 use Betalabs\LaravelHelper\Models\Enums\EngineVirtualEntity as EntityType;
@@ -16,7 +16,7 @@ class VirtualEntityTest extends TestCase
     {
         parent::setUp();
 
-        $this->company = factory(Company::class)->create();
+        $this->company = factory(Tenant::class)->create();
     }
 
     public function testProductResource()
