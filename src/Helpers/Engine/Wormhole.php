@@ -20,13 +20,11 @@ class Wormhole
         string $uri,
         string $prefix = ''
     ): string {
-        $config = Auth::user()->appConfiguration;
+        $engine = Auth::user()->engineRegistry;
 
         $endpoint = '';
         $endpoint .= $prefix ? trim($prefix, '/') . '/' : '';
-        $endpoint .= 'apps/';
-        $endpoint .= $config->engine_app_registry_id;
-        $endpoint .= '/wormhole/';
+        $endpoint .= "apps/{$engine->registry_id}/wormhole/";
         $endpoint .= trim($uri, '/');
 
         return $endpoint;
