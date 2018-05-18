@@ -1,24 +1,24 @@
 <?php
 
-namespace Tests;
+namespace Betalabs\LaravelHelper\Tests;
 
 use Betalabs\LaravelHelper\Helpers\Engine\Wormhole;
-use Betalabs\LaravelHelper\Models\AppConfiguration;
-use Betalabs\LaravelHelper\Models\Company;
+use Betalabs\LaravelHelper\Models\EngineRegistry;
+use Betalabs\LaravelHelper\Models\Tenant;
 use Laravel\Passport\Passport;
 
 class WormholeTest extends TestCase
 {
-    private $appConfig;
+    private $engineRegistry;
 
     protected function setUp()
     {
         parent::setUp();
 
-        $company = factory(Company::class)->create();
-        Passport::actingAs($company);
-        $this->appConfig = factory(AppConfiguration::class)->create([
-            'company_id' => $company->id
+        $tenant = factory(Tenant::class)->create();
+        Passport::actingAs($tenant);
+        $this->engineRegistry = factory(EngineRegistry::class)->create([
+            'tenant_id' => $tenant->id
         ]);
     }
 
@@ -27,7 +27,7 @@ class WormholeTest extends TestCase
         $endpoint = Wormhole::makeEndpoint('configuration');
 
         $this->assertEquals(
-            "apps/{$this->appConfig->engine_app_registry_id}/wormhole/configuration",
+            "apps/{$this->engineRegistry->registry_id}/wormhole/configuration",
             $endpoint
         );
     }
@@ -37,7 +37,7 @@ class WormholeTest extends TestCase
         $endpoint = Wormhole::makeEndpoint('configuration', 'api');
 
         $this->assertEquals(
-            "api/apps/{$this->appConfig->engine_app_registry_id}/wormhole/configuration",
+            "api/apps/{$this->engineRegistry->registry_id}/wormhole/configuration",
             $endpoint
         );
     }

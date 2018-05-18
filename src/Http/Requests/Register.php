@@ -24,18 +24,12 @@ class Register extends FormRequest
     public function rules()
     {
         return [
-            'company.name' => 'string|max:60|required',
-            'company.trading_name' => 'string|max:60|required',
-            'company.email' => 'email|max:80|required',
-            'company.cnpj' => 'string|size:14|required',
+            'tenant.name' => 'string|max:255|required',
+            'tenant.email' => 'email|max:255|required',
 
-            'engine_credential.client_id' => 'numeric|required',
-            'engine_credential.client_secret' => 'string|max:255|required',
-            'engine_credential.username' => 'string|max:255|required',
-            'engine_credential.password' => 'string|max:255|required',
-
-            'app_configuration.engine_app_registry_id' => 'numeric|nullable',
-            'app_configuration.engine_api_base_uri' => 'url|nullable',
+            'engine_registry.registry_id' => 'numeric|required',
+            'engine_registry.api_base_uri' => 'url|required',
+            'engine_registry.api_access_token' => 'string|required',
         ];
     }
 }

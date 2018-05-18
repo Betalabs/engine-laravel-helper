@@ -1,13 +1,11 @@
 <?php
 
-namespace Tests;
-
+namespace Betalabs\LaravelHelper\Tests;
 
 use Betalabs\LaravelHelper\Http\Controllers\AppController;
 use Betalabs\LaravelHelper\Http\Requests\Register as RegisterRequest;
-use Betalabs\LaravelHelper\Models\AppConfiguration;
-use Betalabs\LaravelHelper\Models\Company;
-use Betalabs\LaravelHelper\Models\EngineCredential;
+use Betalabs\LaravelHelper\Models\EngineRegistry;
+use Betalabs\LaravelHelper\Models\Tenant;
 use Betalabs\LaravelHelper\Services\App\Register;
 
 class AppControllerTest extends TestCase
@@ -20,12 +18,10 @@ class AppControllerTest extends TestCase
 
         $app = new AppController();
         $resource = (array)$app->register($request, $service);
-        $company = $resource['resource']->toArray();
+        $tenant = $resource['resource']->toArray();
 
-        $this->assertArrayHasKey('name', $company);
-        $this->assertArrayHasKey('trading_name', $company);
-        $this->assertArrayHasKey('cnpj', $company);
-        $this->assertArrayHasKey('email', $company);
+        $this->assertArrayHasKey('name', $tenant);
+        $this->assertArrayHasKey('email', $tenant);
     }
 
     private function mockRequest()
@@ -37,9 +33,8 @@ class AppControllerTest extends TestCase
         $request->expects($this->once())
             ->method('input')
             ->willReturn([
-                'company' => factory(Company::class)->raw(),
-                'app_configuration' => factory(AppConfiguration::class)->raw(),
-                'engine_credential' => factory(EngineCredential::class)->raw(),
+                'tenant' => factory(Tenant::class)->raw(),
+                'engine_registry' => factory(EngineRegistry::class)->raw(),
             ]);
         return $request;
     }
@@ -56,7 +51,7 @@ class AppControllerTest extends TestCase
             ->willReturn(null);
         $service->expects($this->once())
             ->method('registration')
-            ->willReturn(factory(Company::class)->make());
+            ->willReturn(factory(Tenant::class)->make());
         return $service;
     }
 }

@@ -11,18 +11,19 @@ class EngineVirtualEntity extends Model
      * @var array
      */
     protected $fillable = [
+        'tenant_id',
         'code',
         'type_id',
     ];
 
     /**
-     * Return the related company.
+     * Return the related Tenant.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function company(): BelongsTo
+    public function tenant(): BelongsTo
     {
-        return $this->belongsTo(Company::class);
+        return $this->belongsTo(Tenant::class);
     }
 
     /**

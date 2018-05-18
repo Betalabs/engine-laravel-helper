@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace Betalabs\LaravelHelper\Tests;
 
 use Betalabs\LaravelHelper\LaravelHelperServiceProvider;
 use Laravel\Passport\PassportServiceProvider;

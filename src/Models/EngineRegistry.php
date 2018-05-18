@@ -5,25 +5,25 @@ namespace Betalabs\LaravelHelper\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class EngineCredential extends Model
+class EngineRegistry extends Model
 {
     /**
      * @var array
      */
     protected $fillable = [
-        'client_id',
-        'client_secret',
-        'username',
-        'password'
+        'tenant_id',
+        'registry_id',
+        'api_base_uri',
+        'api_access_token',
     ];
 
     /**
-     * Return the related company.
+     * Return the related Tenant.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function company(): BelongsTo
+    public function tenant(): BelongsTo
     {
-        return $this->belongsTo(Company::class);
+        return $this->belongsTo(Tenant::class);
     }
 }

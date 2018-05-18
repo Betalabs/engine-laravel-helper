@@ -11,16 +11,16 @@ class VirtualEntity
     /**
      * Return a virtual-entity resource
      *
-     * @param \Illuminate\Contracts\Auth\Authenticatable $company
+     * @param \Illuminate\Contracts\Auth\Authenticatable $tenant
      * @param \Betalabs\LaravelHelper\Models\Enums\EngineVirtualEntity $type
      *
      * @return string
      */
     public static function resource(
-        Authenticatable $company,
+        Authenticatable $tenant,
         VirtualEntityType $type
     ): string {
-        $virtualEntity = EngineVirtualEntity::where('company_id', $company->id)
+        $virtualEntity = EngineVirtualEntity::where('tenant_id', $tenant->id)
             ->where('type_id', $type->getValue())->first();
         return "virtual-entities/{$virtualEntity->code}/records";
     }

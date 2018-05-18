@@ -1,13 +1,11 @@
 <?php
 
-namespace Tests;
+namespace Betalabs\LaravelHelper\Tests;
 
-
-use Betalabs\LaravelHelper\Models\AppConfiguration;
-use Betalabs\LaravelHelper\Models\Company;
-use Betalabs\LaravelHelper\Models\EngineCredential;
+use Betalabs\LaravelHelper\Models\EngineRegistry;
+use Betalabs\LaravelHelper\Models\Tenant;
 use Betalabs\LaravelHelper\Services\App\Register;
-use Betalabs\LaravelHelper\Services\Company\Creator;
+use Betalabs\LaravelHelper\Services\Tenant\Creator;
 
 class RegisterTest extends TestCase
 {
@@ -17,18 +15,14 @@ class RegisterTest extends TestCase
 
         $service = new Register($creator);
         $service->setAppData([
-            'company' => factory(Company::class)->raw(),
-            'app_configuration' => factory(AppConfiguration::class)->raw(),
-            'engine_credential' => factory(EngineCredential::class)->raw(),
+            'tenant' => factory(Tenant::class)->raw(),
+            'engine_registry' => factory(EngineRegistry::class)->raw(),
         ]);
-        $company = $service->registration();
+        $tenant = $service->registration();
 
-        $this->assertNotEmpty($company->toArray());
-        $this->assertNotEmpty($company->appConfiguration->toArray());
-        $this->assertNotEmpty($company->engineCredential->toArray());
-
-        $this->assertEquals($company->appConfiguration->company_id, $company->id);
-        $this->assertEquals($company->engineCredential->company_id, $company->id);
+        $this->assertNotEmpty($tenant->toArray());
+        $this->assertNotEmpty($tenant->engineRegistry->toArray());
+        $this->assertEquals($tenant->engineRegistry->tenant_id, $tenant->id);
 
     }
 
@@ -36,15 +30,15 @@ class RegisterTest extends TestCase
     {
         $creator = $this->getMockBuilder(Creator::class)
             ->disableOriginalConstructor()
-            ->setMethods(['setCompanyData', 'create'])
+            ->setMethods(['setData', 'create'])
             ->getMock();
         $creator->expects($this->once())
-            ->method('setCompanyData')
+            ->method('setData')
             ->with($this->isType('array'))
             ->willReturn(null);
         $creator->expects($this->once())
             ->method('create')
-            ->willReturn(factory(Company::class)->create());
+            ->willReturn(factory(Tenant::class)->create());
         return $creator;
     }
 }

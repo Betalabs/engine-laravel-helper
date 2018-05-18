@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEngineVirtualEntitiesTable extends Migration
+class CreateEngineRegistriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,17 @@ class CreateEngineVirtualEntitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('engine_virtual_entities', function (Blueprint $table) {
+        Schema::create('engine_registries', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('tenant_id');
-            $table->string('code')->index();
-            $table->unsignedInteger('type_id');
+            $table->unsignedInteger('registry_id');
+            $table->string('api_base_uri');
+            $table->text('api_access_token');
             $table->timestamps();
 
             $table->foreign('tenant_id')
                 ->references('id')
                 ->on('tenants');
-            $table->foreign('type_id')
-                ->references('id')
-                ->on('engine_virtual_entity_types');
         });
     }
 
@@ -36,11 +34,10 @@ class CreateEngineVirtualEntitiesTable extends Migration
      */
     public function down()
     {
-        Schema::table('engine_virtual_entities', function (Blueprint $table) {
+        Schema::table('engine_registries', function (Blueprint $table) {
             $table->dropForeign(['tenant_id']);
-            $table->dropForeign(['type_id']);
         });
 
-        Schema::dropIfExists('engine_virtual_entities');
+        Schema::dropIfExists('engine_registries');
     }
 }

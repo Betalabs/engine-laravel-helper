@@ -1,22 +1,22 @@
 <?php
 
-namespace Tests;
+namespace Betalabs\LaravelHelper\Tests;
 
 use Betalabs\LaravelHelper\Helpers\Engine\VirtualEntity;
-use Betalabs\LaravelHelper\Models\Company;
+use Betalabs\LaravelHelper\Models\Tenant;
 use Betalabs\LaravelHelper\Models\EngineVirtualEntity;
 use Betalabs\LaravelHelper\Models\EngineVirtualEntityType;
 use Betalabs\LaravelHelper\Models\Enums\EngineVirtualEntity as EntityType;
 
 class VirtualEntityTest extends TestCase
 {
-    private $company;
+    private $tenant;
 
     protected function setUp()
     {
         parent::setUp();
 
-        $this->company = factory(Company::class)->create();
+        $this->tenant = factory(Tenant::class)->create();
     }
 
     public function testProductResource()
@@ -25,13 +25,13 @@ class VirtualEntityTest extends TestCase
             'name' => 'Product'
         ]);
         $virtualEntity = factory(EngineVirtualEntity::class)->create([
-            'company_id' => $this->company->id,
+            'tenant_id' => $this->tenant->id,
             'type_id' => $entityType->id
         ]);
 
         $type = new EntityType(EntityType::PRODUCT);
 
-        $resource = VirtualEntity::resource($this->company, $type);
+        $resource = VirtualEntity::resource($this->tenant, $type);
         $expectedResource = "virtual-entities/{$virtualEntity->code}/records";
 
         $this->assertEquals($expectedResource, $resource);
@@ -44,13 +44,13 @@ class VirtualEntityTest extends TestCase
             'name' => 'Shipping company'
         ]);
         $virtualEntity = factory(EngineVirtualEntity::class)->create([
-            'company_id' => $this->company->id,
+            'tenant_id' => $this->tenant->id,
             'type_id' => $entityType->id
         ]);
 
         $type = new EntityType(EntityType::SHIPPING_COMPANY);
 
-        $resource = VirtualEntity::resource($this->company, $type);
+        $resource = VirtualEntity::resource($this->tenant, $type);
         $expectedResource = "virtual-entities/{$virtualEntity->code}/records";
 
         $this->assertEquals($expectedResource, $resource);

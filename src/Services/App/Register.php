@@ -2,8 +2,8 @@
 
 namespace Betalabs\LaravelHelper\Services\App;
 
-use Betalabs\LaravelHelper\Models\Company;
-use Betalabs\LaravelHelper\Services\Company\Creator;
+use Betalabs\LaravelHelper\Models\Tenant;
+use Betalabs\LaravelHelper\Services\Tenant\Creator;
 
 class Register
 {
@@ -12,14 +12,14 @@ class Register
      */
     private $appData = [];
     /**
-     * @var \Betalabs\LaravelHelper\Services\Company\Creator
+     * @var \Betalabs\LaravelHelper\Services\Tenant\Creator
      */
     private $creator;
 
     /**
      * Register constructor.
      *
-     * @param \Betalabs\LaravelHelper\Services\Company\Creator $creator
+     * @param \Betalabs\LaravelHelper\Services\Tenant\Creator $creator
      */
     public function __construct(Creator $creator)
     {
@@ -39,19 +39,15 @@ class Register
     /**
      * Register a new app user
      *
-     * @return \Betalabs\LaravelHelper\Models\Company
+     * @return \Betalabs\LaravelHelper\Models\Tenant
      * @throws \Exception
      */
-    public function registration(): Company
+    public function registration(): Tenant
     {
-        $this->creator->setCompanyData($this->appData['company']);
+        $this->creator->setData($this->appData['tenant']);
         $company = $this->creator->create();
 
-        $company->appConfiguration()
-            ->create($this->appData['app_configuration']);
-
-        $company->engineCredential()
-            ->create($this->appData['engine_credential']);
+        $company->engineRegistry()->create($this->appData['engine_registry']);
 
         return $company;
     }

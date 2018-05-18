@@ -4,7 +4,7 @@ namespace Betalabs\LaravelHelper\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateCompany extends FormRequest
+class UpdateTenant extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,8 @@ class UpdateCompany extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'string|max:60',
-            'trading_name' => 'string|max:60',
-            'email' => 'email|max:80',
-            'cnpj' => 'string|size:14',
+            'name' => 'string|max:255',
+            'email' => 'email|max:255',
         ];
     }
 }
