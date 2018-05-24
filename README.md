@@ -62,7 +62,7 @@ public function boot()
 }
 ```
 
-5) In your `config/auth.php` configuration file, you should set the driver option of the api authentication guard to passport and the users provider model to our Company model.
+5) In your `config/auth.php` configuration file, you should set the driver option of the api authentication guard to passport and the users provider model to our Tenant model.
 This will instruct your application to use Passport's TokenGuard when authenticating incoming API requests:
 
 ```php
@@ -75,7 +75,7 @@ This will instruct your application to use Passport's TokenGuard when authentica
 'providers' => [
     'users' => [
         'driver' => 'eloquent',
-        'model' => \Betalabs\LaravelHelper\Models\Company::class,
+        'model' => \Betalabs\LaravelHelper\Models\Tenant::class,
     ],
 ],
 ```
