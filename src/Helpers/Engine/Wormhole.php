@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Betalabs\LaravelHelper\Helpers\Engine;
-
 
 use Illuminate\Support\Facades\Auth;
 

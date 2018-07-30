@@ -2,9 +2,9 @@
 
 namespace Betalabs\LaravelHelper\Helpers\Engine;
 
-use App\Scopes\Tenant;
 use Betalabs\LaravelHelper\Models\EngineVirtualEntity;
 use Betalabs\LaravelHelper\Models\Enums\EngineVirtualEntity as VirtualEntityType;
+use Betalabs\LaravelHelper\Scopes\Tenant;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 class VirtualEntity

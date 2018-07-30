@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Betalabs\LaravelHelper\Models\Enums;
-
 
 use MyCLabs\Enum\Enum;
 
