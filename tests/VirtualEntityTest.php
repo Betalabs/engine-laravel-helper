@@ -7,6 +7,7 @@ use Betalabs\LaravelHelper\Models\Tenant;
 use Betalabs\LaravelHelper\Models\EngineVirtualEntity;
 use Betalabs\LaravelHelper\Models\EngineVirtualEntityType;
 use Betalabs\LaravelHelper\Models\Enums\EngineVirtualEntity as EntityType;
+use Laravel\Passport\Passport;
 
 class VirtualEntityTest extends TestCase
 {
@@ -17,6 +18,7 @@ class VirtualEntityTest extends TestCase
         parent::setUp();
 
         $this->tenant = factory(Tenant::class)->create();
+        Passport::actingAs($this->tenant);
     }
 
     public function testProductResource()

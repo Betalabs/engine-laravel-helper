@@ -11,7 +11,7 @@ class MigrateDatabaseTest extends TestCase
     {
         $now = Carbon::now();
 
-        Tenant::create([
+        Tenant::query()->create([
             'name' => 'Test Corp',
             'email' => 'test@test.com',
             'created_at' => $now,

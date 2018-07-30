@@ -19,7 +19,7 @@ class Registry extends Resource
             'headers' => [
                 'Authorization' => "Bearer {$this->accessToken}",
                 'Content-Type' => 'application/json',
-                'Accept' => 'application/json'
+                'Accept' => 'application/json',
             ]
         ];
     }

@@ -20,10 +20,10 @@ class TenantControllerTest extends TestCase
     {
         $controller = new TenantController();
         $resource = (array)$controller->show();
-        $company = $resource['resource']->toArray();
+        $tenant = $resource['resource']->toArray();
 
-        $this->assertArrayHasKey('name', $company);
-        $this->assertArrayHasKey('email', $company);
+        $this->assertArrayHasKey('name', $tenant);
+        $this->assertArrayHasKey('email', $tenant);
     }
 
     public function testUpdate()
@@ -32,14 +32,14 @@ class TenantControllerTest extends TestCase
 
         $controller = new TenantController();
         $oldResource = (array)$controller->show();
-        $oldCompany = $oldResource['resource']->toArray();
+        $oldTenant = $oldResource['resource']->toArray();
 
         $newResource = (array)$controller->update($request);
-        $newCompany = $newResource['resource']->toArray();
+        $newTenant = $newResource['resource']->toArray();
 
-        $this->assertNotEquals($oldCompany['email'], $newCompany['email']);
-        $this->assertArrayHasKey('name', $newCompany);
-        $this->assertArrayHasKey('email', $newCompany);
+        $this->assertNotEquals($oldTenant['email'], $newTenant['email']);
+        $this->assertArrayHasKey('name', $newTenant);
+        $this->assertArrayHasKey('email', $newTenant);
     }
 
     private function mockRequest()

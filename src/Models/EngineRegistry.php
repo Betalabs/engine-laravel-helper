@@ -2,11 +2,14 @@
 
 namespace Betalabs\LaravelHelper\Models;
 
+use Betalabs\LaravelHelper\Models\Traits\BelongsToTenant;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class EngineRegistry extends Model
 {
+    use BelongsToTenant;
+
     /**
      * @var array
      */

@@ -10,7 +10,6 @@ use Betalabs\LaravelHelper\Services\App\Register;
 
 class AppControllerTest extends TestCase
 {
-
     public function testRegister()
     {
         $request = $this->mockRequest();
