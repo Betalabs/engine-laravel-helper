@@ -18,8 +18,9 @@ class CreatorTest extends TestCase
     public function testCreate()
     {
         $service = new Creator();
-        $service->setData(factory(Tenant::class)->raw());
-        $company = $service->create();
+        $company = $service
+            ->setData(factory(Tenant::class)->raw())
+            ->create();
 
         $this->assertInstanceOf(Tenant::class, $company);
         $this->assertNotEmpty($company->name);

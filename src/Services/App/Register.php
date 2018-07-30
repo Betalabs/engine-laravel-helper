@@ -2,8 +2,10 @@
 
 namespace Betalabs\LaravelHelper\Services\App;
 
+use Betalabs\LaravelHelper\Events\GenesisCompleted;
 use Betalabs\LaravelHelper\Models\Tenant;
 use Betalabs\LaravelHelper\Services\Tenant\Creator;
+use Illuminate\Contracts\Events\Dispatcher;
 
 class Register
 {
@@ -15,15 +17,21 @@ class Register
      * @var \Betalabs\LaravelHelper\Services\Tenant\Creator
      */
     private $creator;
+    /**
+     * @var \Illuminate\Contracts\Events\Dispatcher
+     */
+    private $events;
 
     /**
      * Register constructor.
      *
      * @param \Betalabs\LaravelHelper\Services\Tenant\Creator $creator
+     * @param \Illuminate\Contracts\Events\Dispatcher $events
      */
-    public function __construct(Creator $creator)
+    public function __construct(Creator $creator, Dispatcher $events)
     {
         $this->creator = $creator;
+        $this->events = $events;
     }
 
     /**
@@ -44,11 +52,14 @@ class Register
      */
     public function registration(): Tenant
     {
-        $this->creator->setData($this->appData['tenant']);
-        $company = $this->creator->create();
+        $tenant = $this->creator
+            ->setData($this->appData['tenant'])
+            ->create();
 
-        $company->engineRegistry()->create($this->appData['engine_registry']);
+        $tenant->engineRegistry()->create($this->appData['engine_registry']);
 
-        return $company;
+        $this->events->dispatch(new GenesisCompleted($tenant));
+
+        return $tenant;
     }
 }

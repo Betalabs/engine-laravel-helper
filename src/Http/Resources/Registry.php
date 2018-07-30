@@ -18,7 +18,8 @@ class Registry extends Resource
         return [
             'headers' => [
                 'Authorization' => "Bearer {$this->accessToken}",
-                'Accept' => 'application/json'
+                'Content-Type' => 'application/json',
+                'Accept' => 'application/json',
             ]
         ];
     }

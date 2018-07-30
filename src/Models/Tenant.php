@@ -15,10 +15,7 @@ class Tenant extends Authenticatable
     /**
      * @var array
      */
-    protected $fillable = [
-        'name',
-        'email',
-    ];
+    protected $fillable = ['name', 'email'];
 
     /**
      * Return the related EngineRegistry.

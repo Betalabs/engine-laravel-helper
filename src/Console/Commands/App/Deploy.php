@@ -3,6 +3,7 @@
 namespace Betalabs\LaravelHelper\Console\Commands\App;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\App;
 use Laravel\Passport\Client;
 
 class Deploy extends Command
@@ -58,8 +59,7 @@ class Deploy extends Command
      */
     private function isNoChangeEnv(): bool
     {
-        return config('app.env') == 'sandbox'
-            || config('app.env') == 'production';
+        return App::environment(['sandbox', 'production']);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace Betalabs\LaravelHelper\Helpers\Engine;
 
+use App\Scopes\Tenant;
 use Betalabs\LaravelHelper\Models\EngineVirtualEntity;
 use Betalabs\LaravelHelper\Models\Enums\EngineVirtualEntity as VirtualEntityType;
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -20,8 +21,12 @@ class VirtualEntity
         Authenticatable $tenant,
         VirtualEntityType $type
     ): string {
-        $virtualEntity = EngineVirtualEntity::where('tenant_id', $tenant->id)
-            ->where('type_id', $type->getValue())->first();
+        $virtualEntity = EngineVirtualEntity::query()
+            ->withoutGlobalScope(Tenant::class)
+            ->where('tenant_id', $tenant->getAuthIdentifier())
+            ->where('type_id', $type->getValue())
+            ->first();
+
         return "virtual-entities/{$virtualEntity->code}/records";
     }
 }

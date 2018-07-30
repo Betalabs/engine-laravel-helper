@@ -16,10 +16,13 @@ class Creator
      * Set the data property.
      *
      * @param array $data
+     *
+     * @return \Betalabs\LaravelHelper\Services\Tenant\Creator
      */
-    public function setData(array $data): void
+    public function setData(array $data): Creator
     {
         $this->data = $data;
+        return $this;
     }
 
     /**
