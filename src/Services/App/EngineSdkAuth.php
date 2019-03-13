@@ -10,6 +10,20 @@ use Betalabs\Engine\Requests\EndpointResolver;
 class EngineSdkAuth implements EngineAuthenticator
 {
     /**
+     * @var \Betalabs\Engine\Auth\Token
+     */
+    private $token;
+
+    /**
+     * EngineSdkAuth constructor.
+     * @param \Betalabs\Engine\Auth\Token $token
+     */
+    public function __construct(Token $token)
+    {
+        $this->token = $token;
+    }
+
+    /**
      * Authenticate Tenant on Engine SDK
      *
      * @param \Betalabs\LaravelHelper\Models\Tenant $tenant
@@ -20,7 +34,7 @@ class EngineSdkAuth implements EngineAuthenticator
         $endpoint = rtrim($registry->api_base_uri, '/api');
 
         EndpointResolver::setEndpoint($endpoint);
-        resolve(Token::class)->informToken($registry->api_access_token);
+        $this->token->informToken($registry->api_access_token);
     }
 
 }
