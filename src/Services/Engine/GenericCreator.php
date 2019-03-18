@@ -14,6 +14,7 @@ class GenericCreator extends AbstractCreator
     {
         return $this->engineResourceCreator->setData($this->data)
             ->setEndpoint($this->endpoint)
+            ->setEndpointParameters($this->endpointParameters)
             ->setExceptionMessage(
                 trans(
                     $this->exceptionTranslationPath . '.' . $this->endpoint . '.create'

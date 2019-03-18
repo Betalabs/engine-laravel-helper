@@ -10,7 +10,7 @@ class Creator extends AbstractCreator
     /**
      * @var array
      */
-    private $options;
+    private $options = [];
     /**
      * @var string
      */

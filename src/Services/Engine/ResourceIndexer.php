@@ -4,6 +4,7 @@ namespace Betalabs\LaravelHelper\Services\Engine;
 
 use Betalabs\Engine\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Collection;
 use Psr\Http\Message\ResponseInterface;
 
 class ResourceIndexer implements EngineResourceIndexer
@@ -82,9 +83,9 @@ class ResourceIndexer implements EngineResourceIndexer
     /**
      * Retrieve a resource
      *
-     * @return mixed
+     * @return \Illuminate\Support\Collection
      */
-    public function retrieve()
+    public function retrieve(): Collection
     {
         $query = http_build_query(array_merge($this->query, [
             '_limit' => $this->limit,
@@ -96,7 +97,7 @@ class ResourceIndexer implements EngineResourceIndexer
 
         $this->errors($request->getResponse());
 
-        return collect($index->data);
+        return collect($index->data ?? []);
     }
 
     /**
