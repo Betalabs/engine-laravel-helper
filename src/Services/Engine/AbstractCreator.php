@@ -12,6 +12,10 @@ abstract class AbstractCreator
     /**
      * @var array
      */
+    protected $endpointParameters = [];
+    /**
+     * @var array
+     */
     protected $data;
     /**
      * @var string
@@ -41,6 +45,16 @@ abstract class AbstractCreator
         return $this;
     }
 
+
+    /**
+     * @param array $endpointParameters
+     * @return AbstractCreator
+     */
+    public function setEndpointParameters(array $endpointParameters): AbstractCreator
+    {
+        $this->endpointParameters = $endpointParameters;
+        return $this;
+    }
 
     /**
      * @param string $exceptionTranslationPath

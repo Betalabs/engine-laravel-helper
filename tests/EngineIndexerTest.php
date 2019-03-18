@@ -33,7 +33,7 @@ class EngineIndexerTest extends TestCase
             ->with('Não foi possível buscar os canais.')
             ->andReturnSelf();
         ResourceIndexer::shouldReceive('retrieve')
-            ->andReturn(null);
+            ->andReturn(collect([]));
 
         /**@var \Betalabs\LaravelHelper\Services\Engine\GenericIndexer $indexer **/
         $indexer = resolve(GenericIndexer::class);
