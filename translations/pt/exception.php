@@ -29,5 +29,8 @@ return [
     ],
     'categories' => [
         'retrieve' => 'Não foi possível buscas a(s) categoria(s).'
+    ],
+    'notifications' => [
+        'create' => 'Não foi possível criar a notificação.'
     ]
 ];
