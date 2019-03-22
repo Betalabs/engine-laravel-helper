@@ -17,6 +17,7 @@ return [
         'Betalabs\LaravelHelper\Services\Engine\Entity' => 'entities',
         'Betalabs\LaravelHelper\Services\Engine\VirtualEntityRecord' => 'virtual-entities/{virtualEntity}/records',
         'Betalabs\LaravelHelper\Services\Engine\VirtualEntity' => 'virtual-entities',
-        'Betalabs\LaravelHelper\Services\Engine\Categories' => 'categories'
+        'Betalabs\LaravelHelper\Services\Engine\Categories' => 'categories',
+        'Betalabs\LaravelHelper\Services\Engine\Notifications' => 'notifications'
     ]
 ];
