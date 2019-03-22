@@ -26,6 +26,9 @@ class EngineIndexerTest extends TestCase
         ResourceIndexer::shouldReceive('setOffset')
             ->with($offset)
             ->andReturnSelf();
+        ResourceIndexer::shouldReceive('setEndpointParameters')
+            ->with([])
+            ->andReturnSelf();
         ResourceIndexer::shouldReceive('setEndpoint')
             ->with('channels')
             ->andReturnSelf();

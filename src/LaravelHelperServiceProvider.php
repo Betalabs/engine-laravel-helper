@@ -7,10 +7,13 @@ use Betalabs\LaravelHelper\Services\App\EngineAuthenticator;
 use Betalabs\LaravelHelper\Services\App\EngineSdkAuth;
 use Betalabs\LaravelHelper\Services\Engine\EngineResourceCreator;
 use Betalabs\LaravelHelper\Services\Engine\EngineResourceIndexer;
+use Betalabs\LaravelHelper\Services\Engine\EngineResourceShower;
 use Betalabs\LaravelHelper\Services\Engine\GenericCreator;
 use Betalabs\LaravelHelper\Services\Engine\GenericIndexer;
+use Betalabs\LaravelHelper\Services\Engine\GenericShower;
 use Betalabs\LaravelHelper\Services\Engine\ResourceCreator;
 use Betalabs\LaravelHelper\Services\Engine\ResourceIndexer;
+use Betalabs\LaravelHelper\Services\Engine\ResourceShower;
 use Illuminate\Support\ServiceProvider;
 
 class LaravelHelperServiceProvider extends ServiceProvider
@@ -43,6 +46,10 @@ class LaravelHelperServiceProvider extends ServiceProvider
             ->needs(EngineResourceIndexer::class)
             ->give(ResourceIndexer::class);
 
+        $this->app->when(GenericShower::class)
+            ->needs(EngineResourceShower::class)
+            ->give(ResourceShower::class);
+
         // Resolving each engine resource class with their endpoints
         collect(config('engine-endpoints.endpoints'))->each(function($endpoint, $class) {
             collect(config('engine-endpoints.resources'))->each(function($resource) use($endpoint, $class) {
@@ -63,6 +70,15 @@ class LaravelHelperServiceProvider extends ServiceProvider
                                 $resourceIndexer = new ResourceIndexer();
                                 $resourceIndexer->setEndpoint($endpoint);
                                 return $resourceIndexer;
+                            });
+                        break;
+                    case 'Shower':
+                        $this->app->when($class . "\\" . $resource)
+                            ->needs(EngineResourceShower::class)
+                            ->give(function() use($endpoint) {
+                                $resourceShower= new ResourceShower();
+                                $resourceShower->setEndpoint($endpoint);
+                                return $resourceShower;
                             });
                         break;
                 }

@@ -14,6 +14,10 @@ return [
         'Betalabs\LaravelHelper\Services\Engine\ExtraField' => 'extra-fields',
         'Betalabs\LaravelHelper\Services\Engine\ExtraFieldType' => 'extra-field-types',
         'Betalabs\LaravelHelper\Services\Engine\FormExtraField' => 'forms/{formId}/extra-fields',
-        'Betalabs\LaravelHelper\Services\Engine\Entity' => 'entities'
+        'Betalabs\LaravelHelper\Services\Engine\Entity' => 'entities',
+        'Betalabs\LaravelHelper\Services\Engine\VirtualEntityRecord' => 'virtual-entities/{virtualEntity}/records',
+        'Betalabs\LaravelHelper\Services\Engine\VirtualEntity' => 'virtual-entities',
+        'Betalabs\LaravelHelper\Services\Engine\Categories' => 'categories',
+        'Betalabs\LaravelHelper\Services\Engine\Notifications' => 'notifications'
     ]
 ];

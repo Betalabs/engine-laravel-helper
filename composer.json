@@ -33,7 +33,8 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Betalabs\\LaravelHelper\\LaravelHelperServiceProvider"
+        "Betalabs\\LaravelHelper\\LaravelHelperServiceProvider",
+        "Betalabs\\LaravelHelper\\LaravelHelperEventProvider"
       ]
     }
   }

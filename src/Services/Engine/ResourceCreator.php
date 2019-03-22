@@ -9,6 +9,7 @@ use Betalabs\Engine\Request;
 
 class ResourceCreator implements EngineResourceCreator
 {
+    use ReplacesEndpointParameters;
     /**
      * @var array
      */
@@ -60,9 +61,9 @@ class ResourceCreator implements EngineResourceCreator
      * @param array $endpointParameters
      * @return \Betalabs\LaravelHelper\Services\Engine\EngineResourceCreator
      */
-    public function setEndpointParameters(array $endpointParameters): EngineResourceCreator
+    public function setEndpointParameters(?array $endpointParameters): EngineResourceCreator
     {
-        $this->endpointParameters = $endpointParameters;
+        $this->endpointParameters = $endpointParameters ?? [];
         return $this;
     }
 
@@ -95,22 +96,6 @@ class ResourceCreator implements EngineResourceCreator
     {
         if ($response->getStatusCode() != Response::HTTP_CREATED) {
             throw new \RuntimeException($this->exceptionMessage);
-        }
-    }
-
-    /**
-     * Replace url parameters between curly braces for object attributes
-     */
-    private function replaceEndpointParameters()
-    {
-        if(empty($this->endpointParameters)) {
-            return;
-        }
-
-        $matches = [];
-        preg_match_all('/{(.*?)}/', $this->endpoint, $matches);
-        foreach($matches[1] as $match) {
-            $this->endpoint = str_replace("{{$match}}", $this->endpointParameters[$match], $this->endpoint);
         }
     }
 }

@@ -31,6 +31,10 @@ class Creator
      */
     private $entityIdentification;
     /**
+     * @var string
+     */
+    private $channel = 'ERP';
+    /**
      * @var \Betalabs\LaravelHelper\Services\Engine\ExtraFieldType\Indexer
      */
     private $extraFieldTypeIndexer;
@@ -136,16 +140,26 @@ class Creator
     }
 
     /**
+     * @param string $channel
+     * @return Creator
+     */
+    public function setChannel(string $channel): Creator
+    {
+        $this->channel = $channel;
+        return $this;
+    }
+
+    /**
      * Create an extra field on Engine and associate it with a form
      */
     public function create()
     {
-        $erpChannelId = $this->getErpChannelId();
+        $channelId = $this->getChannelId();
         $entityId = $this->getEntityId();
 
         $form = $this->createOrGetForm(
             $entityId,
-            [$erpChannelId]
+            [$channelId]
         );
         $extraFieldTypeId = $this->getExtraFieldTypeId($this->extraFieldType);
 
@@ -172,10 +186,10 @@ class Creator
     /**
      * @return mixed
      */
-    private function getErpChannelId()
+    private function getChannelId()
     {
         return $this->channelIndexer
-            ->setQuery(['channel' => 'ERP'])
+            ->setQuery(['channel' => $this->channel])
             ->index()
             ->first()
             ->id;
@@ -208,7 +222,7 @@ class Creator
             ->setQuery([
                 'name' => $this->formName,
                 'entity' => $this->entityIdentification,
-                'channels' => 'ERP',
+                'channels' => $this->channel,
                 '_filter-approach' => 'and'
             ])
             ->index()
