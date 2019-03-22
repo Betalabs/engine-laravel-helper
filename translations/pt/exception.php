@@ -21,4 +21,13 @@ return [
     'entities' => [
         'retrieve' => 'Não foi possível buscar a entidade.'
     ],
+    'virtual-entities/{virtualEntity}/records' => [
+        'retrieve' => 'Não foi possível buscar o(s) registros de entidade(s) virtuais.'
+    ],
+    'virtual-entities' => [
+        'retrieve' => 'Não foi possível buscar a(s) entidade(s) virtuais.'
+    ],
+    'categories' => [
+        'retrieve' => 'Não foi possível buscas a(s) categoria(s).'
+    ]
 ];

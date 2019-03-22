@@ -3,20 +3,19 @@
 namespace Betalabs\LaravelHelper\Services\Engine;
 
 
-class GenericIndexer extends AbstractIndexer
+class GenericShower extends AbstractShower
 {
     /**
      * Retrieve a resource on engine
      *
      * @return mixed
      */
-    public function index()
+    public function retrieve()
     {
-        return $this->engineResourceIndexer->setQuery($this->query)
+        return $this->engineResourceShower->setQuery($this->query)
             ->setEndpoint($this->endpoint)
             ->setEndpointParameters($this->endpointParameters)
-            ->setLimit($this->limit)
-            ->setOffset($this->offset)
+            ->setRecordId($this->recordId)
             ->setExceptionMessage(
                 trans(
                     $this->exceptionTranslationPath . '.' . $this->endpoint . '.retrieve'
@@ -24,4 +23,5 @@ class GenericIndexer extends AbstractIndexer
             )
             ->retrieve();
     }
+
 }

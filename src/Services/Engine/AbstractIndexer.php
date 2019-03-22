@@ -9,6 +9,10 @@ abstract class AbstractIndexer
      */
     protected $endpoint;
     /**
+     * @var array
+     */
+    protected $endpointParameters = [];
+    /**
      * @var \Betalabs\LaravelHelper\Services\Engine\EngineResourceIndexer
      */
     protected $engineResourceIndexer;
@@ -19,7 +23,7 @@ abstract class AbstractIndexer
     /**
      * @var array
      */
-    protected $query;
+    protected $query = [];
     /**
      * @var int
      */
@@ -45,6 +49,16 @@ abstract class AbstractIndexer
     public function setEndpoint(string $endpoint): AbstractIndexer
     {
         $this->endpoint = $endpoint;
+        return $this;
+    }
+
+    /**
+     * @param array $endpointParameters
+     * @return AbstractIndexer
+     */
+    public function setEndpointParameters(array $endpointParameters): AbstractIndexer
+    {
+        $this->endpointParameters = $endpointParameters;
         return $this;
     }
 

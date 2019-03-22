@@ -9,10 +9,16 @@ use Psr\Http\Message\ResponseInterface;
 
 class ResourceIndexer implements EngineResourceIndexer
 {
+    use ReplacesEndpointParameters;
+
     /**
      * @var string
      */
     protected $endpoint;
+    /**
+     * @var array
+     */
+    protected $endpointParameters = [];
     /**
      * @var array
      */
@@ -41,22 +47,32 @@ class ResourceIndexer implements EngineResourceIndexer
     }
 
     /**
-     * @param array $query
+     * @param array|null $endpointParameters
      * @return \Betalabs\LaravelHelper\Services\Engine\EngineResourceIndexer
      */
-    public function setQuery(array $query): EngineResourceIndexer
+    public function setEndpointParameters(?array $endpointParameters): EngineResourceIndexer
     {
-        $this->query = $query;
+        $this->endpointParameters = $endpointParameters;
         return $this;
     }
 
     /**
-     * @param int $limit
+     * @param array|null $query
      * @return \Betalabs\LaravelHelper\Services\Engine\EngineResourceIndexer
      */
-    public function setLimit(int $limit): EngineResourceIndexer
+    public function setQuery(?array $query): EngineResourceIndexer
     {
-        $this->limit = $limit;
+        $this->query = $query ?? [];
+        return $this;
+    }
+
+    /**
+     * @param int|null $limit
+     * @return \Betalabs\LaravelHelper\Services\Engine\EngineResourceIndexer
+     */
+    public function setLimit(?int $limit): EngineResourceIndexer
+    {
+        $this->limit = $limit ?? 100;
         return $this;
     }
 
@@ -93,6 +109,7 @@ class ResourceIndexer implements EngineResourceIndexer
         ]));
 
         $request = Request::get();
+        $this->replaceEndpointParameters();
         $index = $request->send("{$this->endpoint}?{$query}");
 
         $this->errors($request->getResponse());
