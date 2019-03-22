@@ -28,7 +28,7 @@ return [
         'retrieve' => 'Não foi possível buscar a(s) entidade(s) virtuais.'
     ],
     'categories' => [
-        'retrieve' => 'Não foi possível buscas a(s) categoria(s).'
+        'retrieve' => 'Não foi possível buscar a(s) categoria(s).'
     ],
     'notifications' => [
         'create' => 'Não foi possível criar a notificação.'
