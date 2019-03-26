@@ -3,7 +3,9 @@
 namespace Betalabs\LaravelHelper;
 
 use Betalabs\LaravelHelper\Events\ChannelCreated;
+use Betalabs\LaravelHelper\Events\ExtraFieldAndFormCreated;
 use Betalabs\LaravelHelper\Listeners\StoreChannel;
+use Betalabs\LaravelHelper\Listeners\StoreExtraField;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class LaravelHelperEventProvider extends ServiceProvider
@@ -16,6 +18,9 @@ class LaravelHelperEventProvider extends ServiceProvider
     protected $listen = [
         ChannelCreated::class => [
             StoreChannel::class
+        ],
+        ExtraFieldAndFormCreated::class => [
+            StoreExtraField::class
         ]
     ];
 }

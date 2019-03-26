@@ -2,6 +2,7 @@
 
 namespace Betalabs\LaravelHelper\Services\App\ExtraField;
 
+use Betalabs\LaravelHelper\Events\ExtraFieldAndFormCreated;
 use Betalabs\LaravelHelper\Services\Engine\ExtraFieldType\Indexer as ExtraFieldTypeIndexer;
 use Betalabs\LaravelHelper\Services\Engine\Channel\Indexer as ChannelIndexer;
 use Betalabs\LaravelHelper\Services\Engine\Entity\Indexer as EntityIndexer;
@@ -10,6 +11,7 @@ use Betalabs\LaravelHelper\Services\Engine\Form\Creator as FormCreator;
 use Betalabs\LaravelHelper\Services\Engine\ExtraField\Indexer as ExtraFieldIndexer;
 use Betalabs\LaravelHelper\Services\Engine\ExtraField\Creator as ExtraFieldCreator;
 use Betalabs\LaravelHelper\Services\Engine\FormExtraField\Creator as FormExtraFieldCreator;
+use Illuminate\Support\Facades\Auth;
 
 
 class Creator
@@ -168,6 +170,7 @@ class Creator
         $this->formExtraFieldCreator->setFormId($form->id)
             ->setExtraFieldId($extraField->id)
             ->create();
+        event(new ExtraFieldAndFormCreated($extraField, $form, Auth::user()));
     }
 
     /**

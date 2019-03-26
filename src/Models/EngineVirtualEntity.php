@@ -3,6 +3,7 @@
 namespace Betalabs\LaravelHelper\Models;
 
 use Betalabs\LaravelHelper\Models\Traits\BelongsToTenant;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -37,5 +38,17 @@ class EngineVirtualEntity extends Model
     public function engineVirtualEntityType(): BelongsTo
     {
         return $this->belongsTo(EngineVirtualEntityType::class, 'type_id');
+    }
+
+    /**
+     * Return Virtual Entity By Type ID
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param int $typeId
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|null|object
+     */
+    public function scopeByTypeId(Builder $query, int $typeId)
+    {
+        return $query->where('type_id', $typeId)->first();
     }
 }
