@@ -3,6 +3,8 @@
 namespace Betalabs\LaravelHelper\Tests;
 
 
+use Betalabs\LaravelHelper\Models\EngineExtraField;
+use Betalabs\LaravelHelper\Models\Tenant;
 use Betalabs\LaravelHelper\Services\App\ExtraField\Creator;
 use Facades\Betalabs\LaravelHelper\Services\Engine\ExtraFieldType\Indexer as ExtraFieldTypeIndexer;
 use Facades\Betalabs\LaravelHelper\Services\Engine\Channel\Indexer as ChannelIndexer;
@@ -12,9 +14,19 @@ use Facades\Betalabs\LaravelHelper\Services\Engine\Form\Creator as FormCreator;
 use Facades\Betalabs\LaravelHelper\Services\Engine\ExtraField\Indexer as ExtraFieldIndexer;
 use Facades\Betalabs\LaravelHelper\Services\Engine\ExtraField\Creator as ExtraFieldCreator;
 use Facades\Betalabs\LaravelHelper\Services\Engine\FormExtraField\Creator as FormExtraFieldCreator;
+use Laravel\Passport\Passport;
 
 class ExtraFieldCreatorTest extends TestCase
 {
+    private $tenant;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->tenant = factory(Tenant::class)->create();
+        Passport::actingAs($this->tenant);
+    }
+
     public function testCreate()
     {
         $channel = $this->mockChannelIndexer();
@@ -32,6 +44,14 @@ class ExtraFieldCreatorTest extends TestCase
             ->setExtraFieldType('text')
             ->setFormName($formName)
             ->create();
+
+        $this->assertDatabaseHas('engine_extra_fields', [
+            'tenant_id' => $this->tenant->id,
+            'slug' => str_slug($extraFieldLabel),
+            'code' => $extraField->id,
+            'label' => $extraFieldLabel,
+            'form_code' => $form->id,
+        ]);
     }
 
     /**
@@ -141,6 +161,8 @@ class ExtraFieldCreatorTest extends TestCase
     {
         $extraField = new \stdClass();
         $extraField->id = 12;
+        $extraField->label = $extraFieldLabel;
+        $extraField->slug = str_slug($extraFieldLabel);
         ExtraFieldCreator::shouldReceive('setEntityId')
             ->with($entity->id)
             ->andReturnSelf();
