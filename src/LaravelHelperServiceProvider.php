@@ -53,32 +53,33 @@ class LaravelHelperServiceProvider extends ServiceProvider
         // Resolving each engine resource class with their endpoints
         collect(config('engine-endpoints.endpoints'))->each(function($endpoint, $class) {
             collect(config('engine-endpoints.resources'))->each(function($resource) use($endpoint, $class) {
+                $exceptionTranslationPath = "engine-laravel-helper::exception.{$endpoint}.";
                 switch($resource) {
                     case 'Creator':
                         $this->app->when($class . "\\" . $resource)
                             ->needs(EngineResourceCreator::class)
-                            ->give(function() use($endpoint) {
+                            ->give(function() use($endpoint, $exceptionTranslationPath) {
                                 $resourceCreator = new ResourceCreator();
-                                $resourceCreator->setEndpoint($endpoint);
-                                return $resourceCreator;
+                                return $resourceCreator->setEndpoint($endpoint)
+                                    ->setExceptionMessage(trans("{$exceptionTranslationPath}create"));
                             });
                         break;
                     case 'Indexer':
                         $this->app->when($class . "\\" . $resource)
                             ->needs(EngineResourceIndexer::class)
-                            ->give(function() use($endpoint) {
+                            ->give(function() use($endpoint, $exceptionTranslationPath) {
                                 $resourceIndexer = new ResourceIndexer();
-                                $resourceIndexer->setEndpoint($endpoint);
-                                return $resourceIndexer;
+                                return $resourceIndexer->setEndpoint($endpoint)
+                                    ->setExceptionMessage(trans("{$exceptionTranslationPath}retrieve"));
                             });
                         break;
                     case 'Shower':
                         $this->app->when($class . "\\" . $resource)
                             ->needs(EngineResourceShower::class)
-                            ->give(function() use($endpoint) {
+                            ->give(function() use($endpoint, $exceptionTranslationPath) {
                                 $resourceShower= new ResourceShower();
-                                $resourceShower->setEndpoint($endpoint);
-                                return $resourceShower;
+                                return $resourceShower->setEndpoint($endpoint)
+                                    ->setExceptionMessage(trans("{$exceptionTranslationPath}retrieve"));
                             });
                         break;
                 }

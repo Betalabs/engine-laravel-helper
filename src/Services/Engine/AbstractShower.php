@@ -98,11 +98,6 @@ abstract class AbstractShower
     {
         return $this->engineResourceShower->setQuery($this->query)
             ->setRecordId($this->recordId)
-            ->setExceptionMessage(
-                trans(
-                    $this->exceptionTranslationPath . '.' . $this->endpoint . '.retrieve'
-                )
-            )
             ->retrieve();
     }
 }

@@ -101,11 +101,6 @@ abstract class AbstractIndexer
     {
         return $this->engineResourceIndexer->setQuery($this->query)
             ->setLimit($this->limit)
-            ->setExceptionMessage(
-                trans(
-                    $this->exceptionTranslationPath . '.' . $this->endpoint . '.retrieve'
-                )
-            )
             ->retrieve();
     }
 }
