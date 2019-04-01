@@ -65,5 +65,15 @@ class Shower extends AbstractShower
         return parent::retrieve();
     }
 
+    /**
+     * @param int|null $recordId
+     * @return \Betalabs\LaravelHelper\Services\Engine\AbstractShower
+     * @throws \Exception
+     */
+    public function setRecordId(?int $recordId): AbstractShower
+    {
+        throw new \Exception('Invalid method.');
+    }
+
 
 }
