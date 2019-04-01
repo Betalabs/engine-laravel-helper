@@ -97,7 +97,7 @@ abstract class AbstractShower
     public function retrieve()
     {
         return $this->engineResourceShower->setQuery($this->query)
-            ->setRecordId($this->recordId)
+            ->setRecordId($this->recordId ?? null)
             ->retrieve();
     }
 }

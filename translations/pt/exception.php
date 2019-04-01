@@ -32,5 +32,8 @@ return [
     ],
     'notifications' => [
         'create' => 'Não foi possível criar a notificação.'
+    ],
+    'price/{virtualEntity}/{virtualEntityRecord}/{channel}' => [
+        'retrieve' => 'Não foi possível buscar o preço.'
     ]
 ];
