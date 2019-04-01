@@ -55,7 +55,7 @@ class ResourceShower implements EngineResourceShower
      * @param int|null $recordId
      * @return \Betalabs\LaravelHelper\Services\Engine\EngineResourceShower
      */
-    public function setRecordId(int $recordId): EngineResourceShower
+    public function setRecordId(?int $recordId): EngineResourceShower
     {
         $this->recordId = $recordId;
         return $this;
@@ -92,7 +92,8 @@ class ResourceShower implements EngineResourceShower
 
         $request = Request::get();
         $this->replaceEndpointParameters();
-        $record = $request->send("{$this->endpoint}/{$this->recordId}/?{$query}");
+        $recordId = $this->recordId ?? "";
+        $record = $request->send("{$this->endpoint}/{$recordId}?{$query}");
 
         $this->errors($request->getResponse());
 
