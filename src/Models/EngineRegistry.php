@@ -6,6 +6,9 @@ use Betalabs\LaravelHelper\Models\Traits\BelongsToTenant;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property int registry_id
+ */
 class EngineRegistry extends Model
 {
     use BelongsToTenant;

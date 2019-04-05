@@ -35,5 +35,8 @@ return [
     ],
     'price/{virtualEntity}/{virtualEntityRecord}/{channel}' => [
         'retrieve' => 'Não foi possível buscar o preço.'
+    ],
+    'events/fire' => [
+        'create' => 'Não foi possível acionar o evento.'
     ]
 ];

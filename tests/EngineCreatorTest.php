@@ -2,7 +2,6 @@
 
 namespace Betalabs\LaravelHelper\Tests;
 
-use Betalabs\LaravelHelper\Services\Engine\FormExtraField\Creator as FormExtraFieldCreator;
 use Betalabs\LaravelHelper\Services\Engine\GenericCreator;
 use Facades\Betalabs\LaravelHelper\Services\Engine\ResourceCreator;
 use Illuminate\Support\Facades\App;

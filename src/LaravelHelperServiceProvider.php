@@ -3,11 +3,13 @@
 namespace Betalabs\LaravelHelper;
 
 use Betalabs\LaravelHelper\Console\Commands\App\Deploy;
+use Betalabs\LaravelHelper\Console\Commands\App\UpdateAccessTokens;
 use Betalabs\LaravelHelper\Services\App\EngineAuthenticator;
 use Betalabs\LaravelHelper\Services\App\EngineSdkAuth;
 use Betalabs\LaravelHelper\Services\Engine\EngineResourceCreator;
 use Betalabs\LaravelHelper\Services\Engine\EngineResourceIndexer;
 use Betalabs\LaravelHelper\Services\Engine\EngineResourceShower;
+use Betalabs\LaravelHelper\Services\Engine\Event\Firer;
 use Betalabs\LaravelHelper\Services\Engine\GenericCreator;
 use Betalabs\LaravelHelper\Services\Engine\GenericIndexer;
 use Betalabs\LaravelHelper\Services\Engine\GenericShower;
@@ -39,6 +41,10 @@ class LaravelHelperServiceProvider extends ServiceProvider
         );
 
         $this->app->when(GenericCreator::class)
+            ->needs(EngineResourceCreator::class)
+            ->give(ResourceCreator::class);
+
+        $this->app->when(Firer::class)
             ->needs(EngineResourceCreator::class)
             ->give(ResourceCreator::class);
 
@@ -105,6 +111,7 @@ class LaravelHelperServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->commands(Deploy::class);
+            $this->commands(UpdateAccessTokens::class);
         }
     }
 }
