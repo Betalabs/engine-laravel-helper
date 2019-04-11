@@ -2,7 +2,9 @@
 
 namespace Betalabs\LaravelHelper\Services\Engine\VirtualEntityRecord;
 
-class Structure extends Indexer
+use Betalabs\LaravelHelper\Services\Engine\Mappable;
+
+class Structure extends Indexer implements Mappable
 {
 
 }
