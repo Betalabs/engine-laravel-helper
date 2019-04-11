@@ -7,6 +7,7 @@ return [
         'Updater',
         'Indexer',
         'Shower',
+        'Structure'
     ],
     'endpoints' => [
         'Betalabs\LaravelHelper\Services\Engine\Channel' => 'channels',
@@ -19,6 +20,7 @@ return [
         'Betalabs\LaravelHelper\Services\Engine\VirtualEntity' => 'virtual-entities',
         'Betalabs\LaravelHelper\Services\Engine\Categories' => 'categories',
         'Betalabs\LaravelHelper\Services\Engine\Notifications' => 'notifications',
-        'Betalabs\LaravelHelper\Services\Engine\Price' => 'price/{virtualEntity}/{virtualEntityRecord}/{channel}'
+        'Betalabs\LaravelHelper\Services\Engine\Price' => 'price/{virtualEntity}/{virtualEntityRecord}/{channel}',
+        'Betalabs\LaravelHelper\Services\Engine\FieldMap' => 'field-maps'
     ]
 ];

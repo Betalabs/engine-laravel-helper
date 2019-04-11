@@ -30,7 +30,7 @@ class EngineShowerTest extends TestCase
             ->with($recordId)
             ->andReturnSelf();
         ResourceShower::shouldReceive('setExceptionMessage')
-            ->with('Não foi possível buscar o(s) registros de entidade(s) virtuais.')
+            ->with('Não foi possível buscar o(s) registro(s) de entidade(s) virtuais.')
             ->andReturnSelf();
         ResourceShower::shouldReceive('retrieve')
             ->andReturn(collect([]));
