@@ -88,6 +88,15 @@ class LaravelHelperServiceProvider extends ServiceProvider
                                     ->setExceptionMessage(trans("{$exceptionTranslationPath}retrieve"));
                             });
                         break;
+                    case 'Structure':
+                        $this->app->when($class . "\\" . $resource)
+                            ->needs(EngineResourceIndexer::class)
+                            ->give(function() use($endpoint, $exceptionTranslationPath) {
+                                $resourceIndexer = new ResourceIndexer();
+                                return $resourceIndexer->setEndpoint("{$endpoint}/structure")
+                                    ->setExceptionMessage(trans("{$exceptionTranslationPath}structure"));
+                            });
+                        break;
                 }
             });
         });
