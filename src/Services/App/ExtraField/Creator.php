@@ -10,7 +10,9 @@ use Betalabs\LaravelHelper\Services\Engine\Form\Indexer as FormIndexer;
 use Betalabs\LaravelHelper\Services\Engine\Form\Creator as FormCreator;
 use Betalabs\LaravelHelper\Services\Engine\ExtraField\Indexer as ExtraFieldIndexer;
 use Betalabs\LaravelHelper\Services\Engine\ExtraField\Creator as ExtraFieldCreator;
+use Betalabs\LaravelHelper\Services\Engine\FieldMap\Creator as FieldMapCreator;
 use Betalabs\LaravelHelper\Services\Engine\FormExtraField\Creator as FormExtraFieldCreator;
+use Betalabs\LaravelHelper\Services\Engine\FormExtraField\Indexer as FormExtraFieldIndexer;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -68,7 +70,22 @@ class Creator
      * @var \Betalabs\LaravelHelper\Services\Engine\FormExtraField\Creator
      */
     private $formExtraFieldCreator;
-
+    /**
+     * @var \Betalabs\LaravelHelper\Services\Engine\FormExtraField\Indexer
+     */
+    private $formExtraFieldIndexer;
+    /**
+     * @var string
+     */
+    private $fieldMapKey;
+    /**
+     * @var \Betalabs\LaravelHelper\Services\Engine\FieldMap\Creator
+     */
+    private $fieldMapCreator;
+    /**
+     * @var int
+     */
+    private $appRegistryId;
     /**
      * Creator constructor.
      * @param \Betalabs\LaravelHelper\Services\Engine\ExtraFieldType\Indexer $extraFieldTypeIndexer
@@ -79,6 +96,8 @@ class Creator
      * @param \Betalabs\LaravelHelper\Services\Engine\ExtraField\Indexer $extraFieldIndexer
      * @param \Betalabs\LaravelHelper\Services\Engine\ExtraField\Creator $extraFieldCreator
      * @param \Betalabs\LaravelHelper\Services\Engine\FormExtraField\Creator $formExtraFieldCreator
+     * @param \Betalabs\LaravelHelper\Services\Engine\FormExtraField\Indexer $formExtraFieldIndexer
+     * @param \Betalabs\LaravelHelper\Services\Engine\FieldMap\Creator $fieldMapCreator
      */
     public function __construct(
         ExtraFieldTypeIndexer $extraFieldTypeIndexer,
@@ -88,7 +107,9 @@ class Creator
         FormCreator $formCreator,
         ExtraFieldIndexer $extraFieldIndexer,
         ExtraFieldCreator $extraFieldCreator,
-        FormExtraFieldCreator $formExtraFieldCreator
+        FormExtraFieldCreator $formExtraFieldCreator,
+        FormExtraFieldIndexer $formExtraFieldIndexer,
+        FieldMapCreator $fieldMapCreator
     ) {
         $this->extraFieldTypeIndexer = $extraFieldTypeIndexer;
         $this->channelIndexer = $channelIndexer;
@@ -98,6 +119,8 @@ class Creator
         $this->extraFieldIndexer = $extraFieldIndexer;
         $this->extraFieldCreator = $extraFieldCreator;
         $this->formExtraFieldCreator = $formExtraFieldCreator;
+        $this->formExtraFieldIndexer = $formExtraFieldIndexer;
+        $this->fieldMapCreator = $fieldMapCreator;
     }
 
 
@@ -152,7 +175,27 @@ class Creator
     }
 
     /**
-     * Create an extra field on Engine and associate it with a form
+     * @param string $fieldMapKey
+     * @return Creator
+     */
+    public function setFieldMapKey(string $fieldMapKey): Creator
+    {
+        $this->fieldMapKey = $fieldMapKey;
+        return $this;
+    }
+
+    /**
+     * @param int $appRegistryId
+     * @return Creator
+     */
+    public function setAppRegistryId(int $appRegistryId): Creator
+    {
+        $this->appRegistryId = $appRegistryId;
+        return $this;
+    }
+
+    /**
+     * Create an extra field on Engine and associate it with a form and a field map
      */
     public function create()
     {
@@ -164,13 +207,9 @@ class Creator
             [$channelId]
         );
         $extraFieldTypeId = $this->getExtraFieldTypeId($this->extraFieldType);
-
         $extraField = $this->createOrGetExtraField($entityId, $extraFieldTypeId);
-
-        $this->formExtraFieldCreator->setFormId($form->id)
-            ->setExtraFieldId($extraField->id)
-            ->create();
-        event(new ExtraFieldAndFormCreated($extraField, $form, Auth::user()));
+        $formExtraField = $this->createOrGetFormExtraField($form->id, $extraField->id);
+        $this->createFieldMap($formExtraField->id, $entityId);
     }
 
     /**
@@ -261,6 +300,47 @@ class Creator
         }
 
         return $extraField;
+    }
+
+    /**
+     * Create or get Form Extra Field
+     *
+     * @param int $formId
+     * @param int $extraFieldId
+     * @return mixed
+     */
+    private function createOrGetFormExtraField(int $formId, int $extraFieldId)
+    {
+        $formExtraField = $this->formExtraFieldIndexer
+            ->setFormId($formId)
+            ->setQuery(['id' => $extraFieldId])
+            ->index()
+            ->last();
+
+        if(empty($formExtraField)) {
+            $formExtraField = $this->formExtraFieldCreator
+                ->setFormId($formId)
+                ->setExtraFieldId($extraFieldId)
+                ->create();
+        }
+
+        return $formExtraField;
+    }
+
+    /**
+     * Create Field Map
+     *
+     * @param int $formExtraFieldId
+     * @param int $entityId
+     */
+    private function createFieldMap(int $formExtraFieldId, int $entityId)
+    {
+        $this->fieldMapCreator
+            ->setIdentification($this->fieldMapKey)
+            ->setAppRegistryId($this->appRegistryId)
+            ->setEntityId($entityId)
+            ->setFormExtraFieldId($formExtraFieldId)
+            ->create();
     }
 
 }
