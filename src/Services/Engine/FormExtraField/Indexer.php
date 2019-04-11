@@ -22,6 +22,9 @@ class Indexer extends AbstractIndexer
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function index()
     {
         $this->setEndpointParameters(['formId' => $this->formId]);

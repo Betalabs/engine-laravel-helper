@@ -5,7 +5,8 @@ return [
         'retrieve' => 'Não foi possível buscar os canais.',
     ],
     'forms/{formId}/extra-fields' => [
-        'create' => 'Não foi possível criar a associação de formulário com o campo extra.'
+        'create' => 'Não foi possível criar a associação de formulário com o campo extra.',
+        'retrieve' => 'Não foi possível buscar a associação de formulário com o campo extra'
     ],
     'forms' => [
         'create' => 'Não foi possível criar o formulário.',
@@ -22,7 +23,8 @@ return [
         'retrieve' => 'Não foi possível buscar a entidade.'
     ],
     'virtual-entities/{virtualEntity}/records' => [
-        'retrieve' => 'Não foi possível buscar o(s) registros de entidade(s) virtuais.'
+        'retrieve' => 'Não foi possível buscar o(s) registro(s) de entidade(s) virtuais.',
+        'structure' => 'Não foi possível buscar a estrutura do(s) registro(s) de entidade(s) virtuais.'
     ],
     'virtual-entities' => [
         'retrieve' => 'Não foi possível buscar a(s) entidade(s) virtuais.'
@@ -35,5 +37,8 @@ return [
     ],
     'price/{virtualEntity}/{virtualEntityRecord}/{channel}' => [
         'retrieve' => 'Não foi possível buscar o preço.'
+    ],
+    'field-maps' => [
+        'create' => 'Não foi possível criar o mapa de campos.'
     ]
 ];
