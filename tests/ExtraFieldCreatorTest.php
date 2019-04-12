@@ -3,7 +3,6 @@
 namespace Betalabs\LaravelHelper\Tests;
 
 
-use Betalabs\LaravelHelper\Models\EngineExtraField;
 use Betalabs\LaravelHelper\Models\Tenant;
 use Betalabs\LaravelHelper\Services\App\ExtraField\Creator;
 use Facades\Betalabs\LaravelHelper\Services\Engine\ExtraFieldType\Indexer as ExtraFieldTypeIndexer;
@@ -15,6 +14,8 @@ use Facades\Betalabs\LaravelHelper\Services\Engine\ExtraField\Indexer as ExtraFi
 use Facades\Betalabs\LaravelHelper\Services\Engine\ExtraField\Creator as ExtraFieldCreator;
 use Facades\Betalabs\LaravelHelper\Services\Engine\FormExtraField\Creator as FormExtraFieldCreator;
 use Laravel\Passport\Passport;
+use Facades\Betalabs\LaravelHelper\Services\Engine\FormExtraField\Indexer as FormExtraFieldIndexer;
+use Facades\Betalabs\LaravelHelper\Services\Engine\FieldMap\Creator as FieldMapCreator;
 
 class ExtraFieldCreatorTest extends TestCase
 {
@@ -35,7 +36,9 @@ class ExtraFieldCreatorTest extends TestCase
         $form = $this->mockFormCreator($formName, $entity, $channel);
         list($extraFieldType, $extraFieldLabel) = $this->mockExtraFieldTypeIndexer();
         $extraField = $this->mockExtraFieldCreator($entity, $extraFieldType, $extraFieldLabel);
-        $this->mockFormExtraFieldCreator($form, $extraField);
+        $this->mockFormExtraFieldIndexer($form, $extraField);
+        $formExtraField = $this->mockFormExtraFieldCreator($form, $extraField);
+        $this->mockFieldMapCreator($formExtraField, $entity, $appRegistryId = 3, $fieldMapKey = 'key');
 
         /** @var \Betalabs\LaravelHelper\Services\App\ExtraField\Creator $extraFieldCreator**/
         $extraFieldCreator = resolve(Creator::class);
@@ -43,15 +46,9 @@ class ExtraFieldCreatorTest extends TestCase
             ->setExtraFieldLabel($extraFieldLabel)
             ->setExtraFieldType('text')
             ->setFormName($formName)
+            ->setAppRegistryId($appRegistryId)
+            ->setFieldMapKey($fieldMapKey)
             ->create();
-
-        $this->assertDatabaseHas('engine_extra_fields', [
-            'tenant_id' => $this->tenant->id,
-            'slug' => str_slug($extraFieldLabel),
-            'code' => $extraField->id,
-            'label' => $extraFieldLabel,
-            'form_code' => $form->id,
-        ]);
     }
 
     /**
@@ -180,9 +177,12 @@ class ExtraFieldCreatorTest extends TestCase
     /**
      * @param $form
      * @param $extraField
+     * @return \stdClass
      */
-    private function mockFormExtraFieldCreator($form, $extraField): void
+    private function mockFormExtraFieldCreator($form, $extraField): \stdClass
     {
+        $formExtraField = new \stdClass();
+        $formExtraField->id = 123;
         FormExtraFieldCreator::shouldReceive('setFormId')
             ->with($form->id)
             ->andReturnSelf();
@@ -190,6 +190,45 @@ class ExtraFieldCreatorTest extends TestCase
             ->with($extraField->id)
             ->andReturnSelf();
         FormExtraFieldCreator::shouldReceive('create')
+            ->andReturn($formExtraField);
+        return $formExtraField;
+    }
+
+    private function mockFormExtraFieldIndexer(\stdClass $form, \stdClass $extraField)
+    {
+        FormExtraFieldIndexer::shouldReceive('setFormId')
+            ->with($form->id)
+            ->once()
+            ->andReturnSelf();
+        FormExtraFieldIndexer::shouldReceive('setQuery')
+            ->with(['id' => $extraField->id])
+            ->once()
+            ->andReturnSelf();
+        FormExtraFieldIndexer::shouldReceive('index')
+            ->once()
+            ->andReturn(collect([]));
+    }
+
+    private function mockFieldMapCreator($formExtraField, $entity, $appRegistryId, $fieldMapKey)
+    {
+        FieldMapCreator::shouldReceive('setIdentification')
+            ->with($fieldMapKey)
+            ->once()
+            ->andReturnSelf();
+        FieldMapCreator::shouldReceive('setAppRegistryId')
+            ->with($appRegistryId)
+            ->once()
+            ->andReturnSelf();
+        FieldMapCreator::shouldReceive('setEntityId')
+            ->with($entity->id)
+            ->once()
+            ->andReturnSelf();
+        FieldMapCreator::shouldReceive('setFormExtraFieldId')
+            ->with($formExtraField->id)
+            ->once()
+            ->andReturnSelf();
+        FieldMapCreator::shouldReceive('create')
+            ->once()
             ->andReturn(null);
     }
 }

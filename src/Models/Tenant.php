@@ -8,6 +8,9 @@ use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+/**
+ * @property \Betalabs\LaravelHelper\Models\EngineRegistry engineRegistry
+ */
 class Tenant extends Authenticatable
 {
     use HasApiTokens, Notifiable, SoftDeletes;
