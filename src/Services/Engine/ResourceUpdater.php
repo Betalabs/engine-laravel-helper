@@ -3,7 +3,7 @@
 namespace Betalabs\LaravelHelper\Services\Engine;
 
 
-use Betalabs\Engine\Requests\Request;
+use Betalabs\Engine\Request;
 use GuzzleHttp\Exception\BadResponseException;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -86,8 +86,6 @@ class ResourceUpdater implements EngineResourceUpdater
      * Update a resource
      *
      * @return mixed
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
      */
     public function update()
     {
