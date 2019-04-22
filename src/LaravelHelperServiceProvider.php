@@ -9,13 +9,16 @@ use Betalabs\LaravelHelper\Services\App\EngineSdkAuth;
 use Betalabs\LaravelHelper\Services\Engine\EngineResourceCreator;
 use Betalabs\LaravelHelper\Services\Engine\EngineResourceIndexer;
 use Betalabs\LaravelHelper\Services\Engine\EngineResourceShower;
+use Betalabs\LaravelHelper\Services\Engine\EngineResourceUpdater;
 use Betalabs\LaravelHelper\Services\Engine\Event\Firer;
 use Betalabs\LaravelHelper\Services\Engine\GenericCreator;
 use Betalabs\LaravelHelper\Services\Engine\GenericIndexer;
 use Betalabs\LaravelHelper\Services\Engine\GenericShower;
+use Betalabs\LaravelHelper\Services\Engine\GenericUpdater;
 use Betalabs\LaravelHelper\Services\Engine\ResourceCreator;
 use Betalabs\LaravelHelper\Services\Engine\ResourceIndexer;
 use Betalabs\LaravelHelper\Services\Engine\ResourceShower;
+use Betalabs\LaravelHelper\Services\Engine\ResourceUpdater;
 use Illuminate\Support\ServiceProvider;
 
 class LaravelHelperServiceProvider extends ServiceProvider
@@ -56,6 +59,10 @@ class LaravelHelperServiceProvider extends ServiceProvider
             ->needs(EngineResourceShower::class)
             ->give(ResourceShower::class);
 
+        $this->app->when(GenericUpdater::class)
+            ->needs(EngineResourceUpdater::class)
+            ->give(ResourceUpdater::class);
+
         // Resolving each engine resource class with their endpoints
         collect(config('engine-endpoints.endpoints'))->each(function($endpoint, $class) {
             collect(config('engine-endpoints.resources'))->each(function($resource) use($endpoint, $class) {
@@ -86,6 +93,15 @@ class LaravelHelperServiceProvider extends ServiceProvider
                                 $resourceShower= new ResourceShower();
                                 return $resourceShower->setEndpoint($endpoint)
                                     ->setExceptionMessage(trans("{$exceptionTranslationPath}retrieve"));
+                            });
+                        break;
+                    case 'Updater':
+                        $this->app->when($class . "\\" . $resource)
+                            ->needs(EngineResourceUpdater::class)
+                            ->give(function() use($endpoint, $exceptionTranslationPath) {
+                                $resourceUpdater = new ResourceUpdater();
+                                return $resourceUpdater->setEndpoint($endpoint)
+                                    ->setExceptionMessage(trans("{$exceptionTranslationPath}update"));
                             });
                         break;
                     case 'Structure':
