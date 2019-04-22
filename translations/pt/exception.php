@@ -24,7 +24,8 @@ return [
     ],
     'virtual-entities/{virtualEntity}/records' => [
         'retrieve' => 'Não foi possível buscar o(s) registro(s) de entidade(s) virtuais.',
-        'structure' => 'Não foi possível buscar a estrutura do(s) registro(s) de entidade(s) virtuais.'
+        'structure' => 'Não foi possível buscar a estrutura do(s) registro(s) de entidade(s) virtuais.',
+        'update' => 'Não foi possível atualizar o registro da entidade virtual.'
     ],
     'virtual-entities' => [
         'retrieve' => 'Não foi possível buscar a(s) entidade(s) virtuais.'
@@ -36,7 +37,7 @@ return [
         'create' => 'Não foi possível criar a notificação.'
     ],
     'price/{virtualEntity}/{virtualEntityRecord}/{channel}' => [
-        'retrieve' => 'Não foi possível buscar o preço.'
+        'retrieve' => 'Não foi possível buscar o preço.',
     ],
     'events/fire' => [
         'create' => 'Não foi possível acionar o evento.'
