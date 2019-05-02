@@ -93,7 +93,6 @@ class ExtraFieldCreatorTest extends TestCase
             ->with([
                 'name' => $formName,
                 'entity' => $entityIdentification,
-                'channels' => 'ERP',
                 '_filter-approach' => 'and'
             ])
             ->andReturnSelf();

@@ -27,7 +27,9 @@ class Indexer extends AbstractIndexer
      */
     public function index()
     {
-        $this->setEndpointParameters(['formId' => $this->formId]);
+        $this->engineResourceIndexer->setEndpointParameters([
+            'formId' => $this->formId
+        ]);
         return parent::index();
     }
 
