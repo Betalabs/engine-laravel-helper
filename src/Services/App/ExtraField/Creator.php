@@ -264,7 +264,6 @@ class Creator
             ->setQuery([
                 'name' => $this->formName,
                 'entity' => $this->entityIdentification,
-                'channels' => $this->channel,
                 '_filter-approach' => 'and'
             ])
             ->index()

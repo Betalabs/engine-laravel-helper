@@ -8,10 +8,6 @@ use Betalabs\LaravelHelper\Services\Engine\AbstractCreator;
 class Creator extends AbstractCreator
 {
     /**
-     * @var array
-     */
-    private $options = [];
-    /**
      * @var string
      */
     private $label;
@@ -23,16 +19,6 @@ class Creator extends AbstractCreator
      * @var int
      */
     private $entityId;
-
-    /**
-     * @param array $options
-     * @return Creator
-     */
-    public function setOptions(array $options): Creator
-    {
-        $this->options = $options;
-        return $this;
-    }
 
     /**
      * @param string $label
@@ -73,7 +59,7 @@ class Creator extends AbstractCreator
             'label' => $this->label,
             'extra_field_type_id' => $this->extraFieldTypeId,
             'entity_id' => $this->entityId,
-        ] + (!empty($this->options) ? ['options' => $this->options] : []);
+        ];
 
         return parent::create();
     }
