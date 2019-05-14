@@ -40,6 +40,7 @@ class Deploy extends Command
     public function handle()
     {
         $this->migrations();
+        $this->call('passport:install');
         $this->call('passport:keys');
         $this->createPassportClient();
         $this->call('queue:restart');
