@@ -4,6 +4,7 @@ namespace Betalabs\LaravelHelper\Models;
 
 
 use Betalabs\LaravelHelper\Models\Traits\BelongsToTenant;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -28,5 +29,15 @@ class EngineChannel extends Model
     public function tenant(): BelongsTo
     {
         return $this->belongsTo(Tenant::class);
+    }
+
+    /**
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param $slug
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|null|object
+     */
+    public function scopeBySlug(Builder $query, $slug)
+    {
+        return $query->where(compact("slug"))->first();
     }
 }
