@@ -58,7 +58,7 @@ class Creator extends AbstractCreator
     {
         $this->data = [
             'name' => $this->name,
-            'type' => $this->type,
+            'type' => $this->type->getValue(),
             'channels' => $this->channels,
         ];
         return parent::create();
