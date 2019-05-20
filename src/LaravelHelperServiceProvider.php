@@ -19,6 +19,7 @@ use Betalabs\LaravelHelper\Services\Engine\ResourceCreator;
 use Betalabs\LaravelHelper\Services\Engine\ResourceIndexer;
 use Betalabs\LaravelHelper\Services\Engine\ResourceShower;
 use Betalabs\LaravelHelper\Services\Engine\ResourceUpdater;
+use Betalabs\LaravelHelper\Services\Engine\ZipCodeRange\Calculator;
 use Illuminate\Support\ServiceProvider;
 
 class LaravelHelperServiceProvider extends ServiceProvider
@@ -52,6 +53,10 @@ class LaravelHelperServiceProvider extends ServiceProvider
             ->give(ResourceCreator::class);
 
         $this->app->when(GenericIndexer::class)
+            ->needs(EngineResourceIndexer::class)
+            ->give(ResourceIndexer::class);
+
+        $this->app->when(Calculator::class)
             ->needs(EngineResourceIndexer::class)
             ->give(ResourceIndexer::class);
 
