@@ -21,6 +21,8 @@ return [
         'Betalabs\LaravelHelper\Services\Engine\Categories' => 'categories',
         'Betalabs\LaravelHelper\Services\Engine\Notifications' => 'notifications',
         'Betalabs\LaravelHelper\Services\Engine\Price' => 'price/{virtualEntity}/{virtualEntityRecord}/{channel}',
-        'Betalabs\LaravelHelper\Services\Engine\FieldMap' => 'field-maps'
+        'Betalabs\LaravelHelper\Services\Engine\FieldMap' => 'field-maps',
+        'Betalabs\LaravelHelper\Services\Engine\Client' => 'clients',
+        'Betalabs\LaravelHelper\Services\Engine\PaymentMethod' => 'payment-methods'
     ]
 ];

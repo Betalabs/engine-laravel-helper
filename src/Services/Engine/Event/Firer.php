@@ -4,6 +4,7 @@ namespace Betalabs\LaravelHelper\Services\Engine\Event;
 
 
 use Betalabs\LaravelHelper\Services\Engine\GenericCreator;
+use Symfony\Component\Routing\Exception\MethodNotAllowedException;
 
 class Firer extends GenericCreator
 {
@@ -60,6 +61,6 @@ class Firer extends GenericCreator
      */
     public function create()
     {
-        throw new \Exception('Invalid method.');
+        throw new MethodNotAllowedException(['fire']);
     }
 }

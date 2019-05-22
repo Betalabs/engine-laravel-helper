@@ -44,5 +44,16 @@ return [
      ],
     'field-maps' => [
         'create' => 'Não foi possível criar o mapa de campos.'
+    ],
+    'client' => [
+        'retrieve' => 'Não foi possível buscar o cliente.',
+        'create' => 'Não foi possível criar o cliente.'
+    ],
+    'zip-code-ranges/calculate' => [
+        'retrieve' => 'Não foi possível calcular as faixas de CEP.'
+    ],
+    'payment-methods' => [
+        'retrieve' => 'Não foi possível buscar o(s) método(s) de pagamento.',
+        'create' => 'Não foi possível criar o método de pagamento.'
     ]
 ];
