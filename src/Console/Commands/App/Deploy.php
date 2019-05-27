@@ -40,8 +40,6 @@ class Deploy extends Command
     public function handle()
     {
         $this->migrations();
-        $this->call('passport:install');
-        $this->call('passport:keys');
         $this->createPassportClient();
         $this->call('queue:restart');
 
@@ -72,6 +70,8 @@ class Deploy extends Command
             return;
         }
 
+        $this->call('passport:install');
+        $this->call('passport:keys');
         $this->call('passport:client', [
             '--personal' => true,
             '--name' => config('app.name') . ' Personal Access Client'
