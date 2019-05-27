@@ -49,6 +49,8 @@ class Deploy extends Command
         } else {
             $this->call('db:seed');
         }
+
+        $this->seeders();
     }
 
     /**
@@ -87,6 +89,18 @@ class Deploy extends Command
             $this->call('migrate', ['--force' => true]);
         } else {
             $this->call('migrate:fresh');
+        }
+    }
+
+    /**
+     * Run the seeders
+     */
+    private function seeders(): void
+    {
+        if ($this->isNoChangeEnv()) {
+            $this->call('seed', ['--force' => true]);
+        } else {
+            $this->call('seed');
         }
     }
 }
