@@ -168,6 +168,9 @@ class ExtraFieldCreatorTest extends TestCase
         ExtraFieldCreator::shouldReceive('setLabel')
             ->with($extraFieldLabel)
             ->andReturnSelf();
+        ExtraFieldCreator::shouldReceive('setOptions')
+            ->with([])
+            ->andReturnSelf();
         ExtraFieldCreator::shouldReceive('create')
             ->andReturn($extraField);
         return $extraField;

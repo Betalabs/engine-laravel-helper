@@ -19,6 +19,10 @@ class Creator extends AbstractCreator
      * @var int
      */
     private $entityId;
+    /**
+     * @var array
+     */
+    private $options = [];
 
     /**
      * @param string $label
@@ -51,6 +55,16 @@ class Creator extends AbstractCreator
     }
 
     /**
+     * @param array $options
+     * @return Creator
+     */
+    public function setOptions(array $options): Creator
+    {
+        $this->options = $options;
+        return $this;
+    }
+
+    /**
      * @return mixed
      */
     public function create()
@@ -60,6 +74,9 @@ class Creator extends AbstractCreator
             'extra_field_type_id' => $this->extraFieldTypeId,
             'entity_id' => $this->entityId,
         ];
+        if(!empty($this->options)){
+            $this->data['options'] = $this->options;
+        }
 
         return parent::create();
     }
