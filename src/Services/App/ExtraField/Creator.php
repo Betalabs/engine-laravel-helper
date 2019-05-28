@@ -87,6 +87,11 @@ class Creator
      */
     private $appRegistryId;
     /**
+     * @var array
+     */
+    private $options = [];
+
+    /**
      * Creator constructor.
      * @param \Betalabs\LaravelHelper\Services\Engine\ExtraFieldType\Indexer $extraFieldTypeIndexer
      * @param \Betalabs\LaravelHelper\Services\Engine\Channel\Indexer $channelIndexer
@@ -195,6 +200,16 @@ class Creator
     }
 
     /**
+     * @param array $options
+     * @return Creator
+     */
+    public function setOptions(array $options): Creator
+    {
+        $this->options = $options;
+        return $this;
+    }
+
+    /**
      * Create an extra field on Engine and associate it with a form and a field map
      */
     public function create()
@@ -295,6 +310,7 @@ class Creator
             $extraField = $this->extraFieldCreator->setEntityId($entityId)
                 ->setExtraFieldTypeId($extraFieldTypeId)
                 ->setLabel($this->extraFieldLabel)
+                ->setOptions($this->options)
                 ->create();
         }
 
