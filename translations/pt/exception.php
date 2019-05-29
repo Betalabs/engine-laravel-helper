@@ -55,5 +55,10 @@ return [
     'payment-methods' => [
         'retrieve' => 'Não foi possível buscar o(s) método(s) de pagamento.',
         'create' => 'Não foi possível criar o método de pagamento.'
+    ],
+    'orders' => [
+        'retrieve' => 'Não foi possível buscar a(s) venda.',
+        'create' => 'Não foi possível criar a venda.',
+        'update' => 'Não foi possível atualizar a venda.',
     ]
 ];
