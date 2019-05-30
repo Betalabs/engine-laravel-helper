@@ -60,5 +60,8 @@ return [
         'retrieve' => 'Não foi possível buscar a(s) venda.',
         'create' => 'Não foi possível criar a venda.',
         'update' => 'Não foi possível atualizar a venda.',
+    ],
+    'events' => [
+        'create' => 'Não foi possível criar o(s) evento.',
     ]
 ];

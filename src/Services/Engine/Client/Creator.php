@@ -41,7 +41,7 @@ class Creator extends AbstractCreator
      */
     private $dateOfBirth;
     /**
-     * @var $string
+     * @var string
      */
     private $gender;
     /**
@@ -163,7 +163,6 @@ class Creator extends AbstractCreator
                 'document1' => $this->document1,
                 'document2' => $this->document2,
                 'date_of_birth' => $this->dateOfBirth,
-                'gender' => $this->gender,
                 'telephone' => [
                     'ddd' => $this->telephone->getDdd(),
                     'number' => $this->telephone->getNumber()
@@ -171,6 +170,9 @@ class Creator extends AbstractCreator
             ],
             $this->additionalData
         );
+        if(isset($this->gender)) {
+            $this->data['gender'] = $this->gender;
+        }
         return parent::create();
     }
 
