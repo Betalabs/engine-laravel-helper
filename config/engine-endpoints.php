@@ -24,6 +24,7 @@ return [
         'Betalabs\LaravelHelper\Services\Engine\FieldMap' => 'field-maps',
         'Betalabs\LaravelHelper\Services\Engine\Client' => 'clients',
         'Betalabs\LaravelHelper\Services\Engine\PaymentMethod' => 'payment-methods',
-        'Betalabs\LaravelHelper\Services\Engine\Order' => 'orders'
+        'Betalabs\LaravelHelper\Services\Engine\Order' => 'orders',
+        'Betalabs\LaravelHelper\Services\Engine\Event' => 'events'
     ]
 ];
