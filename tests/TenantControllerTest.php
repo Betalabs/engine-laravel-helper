@@ -5,6 +5,7 @@ namespace Betalabs\LaravelHelper\Tests;
 use Betalabs\LaravelHelper\Http\Controllers\TenantController;
 use Betalabs\LaravelHelper\Http\Requests\UpdateTenant;
 use Betalabs\LaravelHelper\Models\Tenant;
+use Betalabs\LaravelHelper\Services\Tenant\Updater;
 use Laravel\Passport\Passport;
 
 class TenantControllerTest extends TestCase
@@ -28,18 +29,21 @@ class TenantControllerTest extends TestCase
 
     public function testUpdate()
     {
+        $this->artisan('passport:install');
+
         $request = $this->mockRequest();
 
         $controller = new TenantController();
         $oldResource = (array)$controller->show();
         $oldTenant = $oldResource['resource']->toArray();
 
-        $newResource = (array)$controller->update($request);
+        $newResource = (array)$controller->update($request, new Updater());
         $newTenant = $newResource['resource']->toArray();
 
         $this->assertNotEquals($oldTenant['email'], $newTenant['email']);
         $this->assertArrayHasKey('name', $newTenant);
         $this->assertArrayHasKey('email', $newTenant);
+        $this->assertArrayHasKey('accessToken', $newTenant);
     }
 
     private function mockRequest()
