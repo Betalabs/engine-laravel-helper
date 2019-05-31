@@ -4,6 +4,7 @@ namespace Betalabs\LaravelHelper\Http\Controllers;
 
 use Betalabs\LaravelHelper\Http\Requests\UpdateTenant;
 use Betalabs\LaravelHelper\Http\Resources\Tenant;
+use Betalabs\LaravelHelper\Services\Tenant\Updater;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -29,14 +30,11 @@ class TenantController extends BaseController
      *
      * @param \Betalabs\LaravelHelper\Http\Requests\UpdateTenant $request
      *
+     * @param \Betalabs\LaravelHelper\Services\Tenant\Updater $updater
      * @return \Betalabs\LaravelHelper\Http\Resources\Tenant
      */
-    public function update(UpdateTenant $request): Tenant
+    public function update(UpdateTenant $request, Updater $updater): Tenant
     {
-        /** @var \Betalabs\LaravelHelper\Models\Tenant $tenant */
-        $tenant = Auth::user();
-        $tenant->update($request->input());
-
-        return new Tenant($tenant);
+        return new Tenant($updater->update(Auth::user(), $request->input()));
     }
 }
