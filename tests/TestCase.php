@@ -4,6 +4,7 @@ namespace Betalabs\LaravelHelper\Tests;
 
 use Betalabs\LaravelHelper\LaravelHelperEventProvider;
 use Betalabs\LaravelHelper\LaravelHelperServiceProvider;
+use Betalabs\LaravelHelper\PerennialAccessTokenProvider;
 use Laravel\Passport\PassportServiceProvider;
 
 abstract class TestCase extends \Orchestra\Testbench\TestCase
@@ -28,7 +29,8 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
         return [
             LaravelHelperServiceProvider::class,
             PassportServiceProvider::class,
-            LaravelHelperEventProvider::class
+            LaravelHelperEventProvider::class,
+            PerennialAccessTokenProvider::class
         ];
     }
 }

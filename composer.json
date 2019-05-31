@@ -34,7 +34,8 @@
     "laravel": {
       "providers": [
         "Betalabs\\LaravelHelper\\LaravelHelperServiceProvider",
-        "Betalabs\\LaravelHelper\\LaravelHelperEventProvider"
+        "Betalabs\\LaravelHelper\\LaravelHelperEventProvider",
+        "Betalabs\\LaravelHelper\\PerennialAccessTokenProvider"
       ]
     }
   }
