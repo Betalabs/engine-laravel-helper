@@ -26,6 +26,7 @@ return [
         'Betalabs\LaravelHelper\Services\Engine\PaymentMethod' => 'payment-methods',
         'Betalabs\LaravelHelper\Services\Engine\Order' => 'orders',
         'Betalabs\LaravelHelper\Services\Engine\Event' => 'events',
-        'Betalabs\LaravelHelper\Services\NFe\TaxInvoice' => 'apps/{registryId}/wormhole/tax-invoices'
+        'Betalabs\LaravelHelper\Services\NFe\TaxInvoice' => 'apps/{registryId}/wormhole/tax-invoices',
+        'Betalabs\LaravelHelper\Services\Engine\AppRegistry' => 'apps'
     ]
 ];

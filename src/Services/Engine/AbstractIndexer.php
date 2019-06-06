@@ -102,6 +102,17 @@ abstract class AbstractIndexer
     }
 
     /**
+     * @param $field
+     * @param $value
+     * @return AbstractIndexer
+     */
+    public function like($field, $value): AbstractIndexer
+    {
+        $this->query["$field-lk"] = "*$value*";
+        return $this;
+    }
+
+    /**
      * Retrieve a resource on engine
      *
      * @return mixed
