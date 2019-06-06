@@ -20,7 +20,7 @@ class Indexer extends AbstractIndexer
     public function index()
     {
         $this->engineResourceIndexer->setEndpointParameters([
-            'registryId' => EngineRegistry::bySlug('nfe') ?? $this->registryId
+            'registryId' => EngineRegistry::bySlug('nfe')->registry_id ?? $this->registryId
         ]);
         return parent::index();
     }

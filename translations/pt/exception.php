@@ -63,5 +63,8 @@ return [
     ],
     'events' => [
         'create' => 'Não foi possível criar o(s) evento.',
+    ],
+    'apps/{registryId}/wormhole/tax-invoices' => [
+        'retrieve' => 'Não foi possível buscar a(s) nota(s) fiscais.',
     ]
 ];
