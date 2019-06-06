@@ -93,6 +93,15 @@ abstract class AbstractIndexer
     }
 
     /**
+     * @return AbstractIndexer
+     */
+    public function and(): AbstractIndexer
+    {
+        $this->query['_filter-approach'] = 'and';
+        return $this;
+    }
+
+    /**
      * Retrieve a resource on engine
      *
      * @return mixed

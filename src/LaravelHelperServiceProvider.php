@@ -77,7 +77,7 @@ class LaravelHelperServiceProvider extends ServiceProvider
                         $this->app->when($class . "\\" . $resource)
                             ->needs(EngineResourceCreator::class)
                             ->give(function() use($endpoint, $exceptionTranslationPath) {
-                                $resourceCreator = new ResourceCreator();
+                                $resourceCreator = resolve(ResourceCreator::class);
                                 return $resourceCreator->setEndpoint($endpoint)
                                     ->setExceptionMessage(trans("{$exceptionTranslationPath}create"));
                             });
@@ -86,7 +86,7 @@ class LaravelHelperServiceProvider extends ServiceProvider
                         $this->app->when($class . "\\" . $resource)
                             ->needs(EngineResourceIndexer::class)
                             ->give(function() use($endpoint, $exceptionTranslationPath) {
-                                $resourceIndexer = new ResourceIndexer();
+                                $resourceIndexer = resolve(ResourceIndexer::class);
                                 return $resourceIndexer->setEndpoint($endpoint)
                                     ->setExceptionMessage(trans("{$exceptionTranslationPath}retrieve"));
                             });
@@ -95,7 +95,7 @@ class LaravelHelperServiceProvider extends ServiceProvider
                         $this->app->when($class . "\\" . $resource)
                             ->needs(EngineResourceShower::class)
                             ->give(function() use($endpoint, $exceptionTranslationPath) {
-                                $resourceShower= new ResourceShower();
+                                $resourceShower= resolve(ResourceShower::class);
                                 return $resourceShower->setEndpoint($endpoint)
                                     ->setExceptionMessage(trans("{$exceptionTranslationPath}retrieve"));
                             });
@@ -104,7 +104,7 @@ class LaravelHelperServiceProvider extends ServiceProvider
                         $this->app->when($class . "\\" . $resource)
                             ->needs(EngineResourceUpdater::class)
                             ->give(function() use($endpoint, $exceptionTranslationPath) {
-                                $resourceUpdater = new ResourceUpdater();
+                                $resourceUpdater = resolve(ResourceUpdater::class);
                                 return $resourceUpdater->setEndpoint($endpoint)
                                     ->setExceptionMessage(trans("{$exceptionTranslationPath}update"));
                             });
@@ -113,7 +113,7 @@ class LaravelHelperServiceProvider extends ServiceProvider
                         $this->app->when($class . "\\" . $resource)
                             ->needs(EngineResourceIndexer::class)
                             ->give(function() use($endpoint, $exceptionTranslationPath) {
-                                $resourceIndexer = new ResourceIndexer();
+                                $resourceIndexer = resolve(ResourceIndexer::class);
                                 return $resourceIndexer->setEndpoint("{$endpoint}/structure")
                                     ->setExceptionMessage(trans("{$exceptionTranslationPath}structure"));
                             });
