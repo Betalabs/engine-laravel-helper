@@ -66,5 +66,8 @@ return [
     ],
     'apps/{registryId}/wormhole/tax-invoices' => [
         'retrieve' => 'Não foi possível buscar a(s) nota(s) fiscais.',
+    ],
+    'apps' => [
+        'retrieve' => 'Não foi possível buscar o registro do aplicativo.'
     ]
 ];
