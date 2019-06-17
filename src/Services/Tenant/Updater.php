@@ -2,6 +2,7 @@
 
 namespace Betalabs\LaravelHelper\Services\Tenant;
 
+use Betalabs\LaravelHelper\Models\EngineRegistry;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 class Updater
@@ -19,6 +20,18 @@ class Updater
             "{$authenticatable->name} token"
         )->accessToken;
 
+        $this->saveEngineToken($authenticatable, $input);
+
         return $authenticatable;
+    }
+
+    private function saveEngineToken(Authenticatable $authenticatable, $input)
+    {
+        if(!empty($input['engine_api_access_token'])) {
+            $engineRegistry = EngineRegistry::bySlug('engine')->first();
+            $engineRegistry->api_access_token = $input['engine_api_access_token'];
+            $engineRegistry->save();
+        }
+
     }
 }
