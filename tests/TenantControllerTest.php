@@ -4,8 +4,11 @@ namespace Betalabs\LaravelHelper\Tests;
 
 use Betalabs\LaravelHelper\Http\Controllers\TenantController;
 use Betalabs\LaravelHelper\Http\Requests\UpdateTenant;
+use Betalabs\LaravelHelper\Models\EngineRegistry;
 use Betalabs\LaravelHelper\Models\Tenant;
 use Betalabs\LaravelHelper\Services\Tenant\Updater;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\View\Engines\Engine;
 use Laravel\Passport\Passport;
 
 class TenantControllerTest extends TestCase
@@ -31,6 +34,8 @@ class TenantControllerTest extends TestCase
     {
         $this->artisan('passport:install');
 
+        factory(EngineRegistry::class)->create(['tenant_id' => Auth::id()]);
+
         $request = $this->mockRequest();
 
         $controller = new TenantController();
@@ -44,6 +49,7 @@ class TenantControllerTest extends TestCase
         $this->assertArrayHasKey('name', $newTenant);
         $this->assertArrayHasKey('email', $newTenant);
         $this->assertArrayHasKey('accessToken', $newTenant);
+        $this->assertEquals('engineToken', EngineRegistry::bySlug('engine')->api_access_token);
     }
 
     private function mockRequest()
@@ -54,7 +60,14 @@ class TenantControllerTest extends TestCase
             ->getMock();
         $request->expects($this->once())
             ->method('input')
-            ->willReturn(factory(Tenant::class)->raw());
+            ->willReturn(
+                array_merge(
+                    factory(Tenant::class)->raw(),
+                    [
+                        'engine_api_access_token' => 'engineToken'
+                    ]
+                )
+            );
         return $request;
     }
 }
