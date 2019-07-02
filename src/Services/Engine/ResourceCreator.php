@@ -94,9 +94,7 @@ class ResourceCreator implements EngineResourceCreator
      */
     protected function errors(ResponseInterface $response): void
     {
-        if ($response->getStatusCode() != Response::HTTP_CREATED
-            && $response->getStatusCode() != Response::HTTP_NO_CONTENT
-        ) {
+        if ($response->getStatusCode() > 299) {
             throw new \RuntimeException($this->exceptionMessage);
         }
     }
