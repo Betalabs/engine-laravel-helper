@@ -84,7 +84,7 @@ class ResourceCreator implements EngineResourceCreator
 
         $this->errors($post->getResponse());
 
-        return $response->data;
+        return $response->data ?? null;
     }
 
     /**
@@ -94,7 +94,7 @@ class ResourceCreator implements EngineResourceCreator
      */
     protected function errors(ResponseInterface $response): void
     {
-        if ($response->getStatusCode() != Response::HTTP_CREATED) {
+        if ($response->getStatusCode() > 299) {
             throw new \RuntimeException($this->exceptionMessage);
         }
     }
