@@ -28,7 +28,7 @@ abstract class AbstractShow implements ShowInterface
      */
     public function show()
     {
-        return collect($this->structure->rules())->keys()->reduce(function (Collection $carrier, $rule) {
+        return collect($this->structure->toArray()['rules'])->keys()->reduce(function (Collection $carrier, $rule) {
             return $carrier->push([
                 'key' => $rule,
                 'value' => $this->getValue($rule),
