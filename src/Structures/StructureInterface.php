@@ -4,7 +4,10 @@
 namespace Betalabs\LaravelHelper\Structures;
 
 
-interface StructureInterface
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\Support\Jsonable;
+
+interface StructureInterface extends Jsonable, Arrayable
 {
     /**
      * Fields labels
@@ -128,19 +131,4 @@ interface StructureInterface
      * @return array
      */
     public function with();
-
-    /**
-     * Make a menu
-     *
-     * @return array
-     */
-    public function toArray(): array;
-
-    /**
-     * Return a Json representation of this object
-     *
-     * @param int $options
-     * @return string
-     */
-    public function toJson($options = 0);
 }
