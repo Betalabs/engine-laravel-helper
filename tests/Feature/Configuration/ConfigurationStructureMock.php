@@ -5,10 +5,8 @@ namespace Betalabs\LaravelHelper\Tests\Feature\Configuration;
 
 
 use Betalabs\LaravelHelper\Structures\ConfigurationStructureInterface;
-use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Contracts\Support\Jsonable;
 
-class ConfigurationStructureMock implements ConfigurationStructureInterface, Jsonable, Arrayable
+class ConfigurationStructureMock implements ConfigurationStructureInterface
 {
     public function labels(): array
     {
@@ -84,7 +82,7 @@ class ConfigurationStructureMock implements ConfigurationStructureInterface, Jso
         return [];
     }
 
-    public function toArray(): array
+    public function toArray()
     {
         return [
             'type' => 'form',
@@ -93,7 +91,7 @@ class ConfigurationStructureMock implements ConfigurationStructureInterface, Jso
         ];
     }
 
-    public function toJson($options = 0): string
+    public function toJson($options = 0)
     {
         return \json_encode(['data' => $this->toArray()]);
     }
