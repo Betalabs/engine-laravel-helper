@@ -8,45 +8,59 @@ use Betalabs\LaravelHelper\Services\Engine\AbstractShower;
 class Shower extends AbstractShower
 {
     /**
-     * @var int
+     * @var string
      */
-    private $virtualEntity;
+    private $type = 'items';
     /**
-     * @var int
+     * @var boolean
      */
-    private $virtualEntityRecord;
+    private $useAliasId = true;
     /**
-     * @var int
+     * @var int[]
      */
-    private $channel;
+    private $ids;
+    /**
+     * @var int[]
+     */
+    private $channels;
 
     /**
-     * @param int $virtualEntity
+     * @param string $type
      * @return Shower
      */
-    public function setVirtualEntity(int $virtualEntity): Shower
+    public function setType(string $type): Shower
     {
-        $this->virtualEntity = $virtualEntity;
+        $this->type = $type;
         return $this;
     }
 
     /**
-     * @param int $virtualEntityRecord
+     * @param bool $useAliasId
      * @return Shower
      */
-    public function setVirtualEntityRecord(int $virtualEntityRecord): Shower
+    public function setUseAliasId(bool $useAliasId): Shower
     {
-        $this->virtualEntityRecord = $virtualEntityRecord;
+        $this->useAliasId = $useAliasId;
         return $this;
     }
 
     /**
-     * @param int $channel
+     * @param int[] $ids
      * @return Shower
      */
-    public function setChannel(int $channel): Shower
+    public function setIds(array $ids): Shower
     {
-        $this->channel = $channel;
+        $this->ids = $ids;
+        return $this;
+    }
+
+    /**
+     * @param int[] $channels
+     * @return Shower
+     */
+    public function setChannels(array $channels): Shower
+    {
+        $this->channels = $channels;
         return $this;
     }
 
@@ -58,22 +72,14 @@ class Shower extends AbstractShower
     public function retrieve()
     {
         $this->engineResourceShower->setEndpointParameters([
-            'virtualEntity' => $this->virtualEntity,
-            'virtualEntityRecord' => $this->virtualEntityRecord,
-            'channel' => $this->channel
+            'type' => $this->type
         ]);
+        $this->query = [
+            'useAliasId' => $this->useAliasId,
+            'ids' => $this->ids,
+            'channels' => $this->channels
+        ];
         return parent::retrieve();
     }
-
-    /**
-     * @param int|null $recordId
-     * @return \Betalabs\LaravelHelper\Services\Engine\AbstractShower
-     * @throws \Exception
-     */
-    public function setRecordId(?int $recordId): AbstractShower
-    {
-        throw new \Exception('Invalid method.');
-    }
-
 
 }
