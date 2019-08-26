@@ -203,7 +203,7 @@ class ExtraFieldCreatorTest extends TestCase
             ->once()
             ->andReturnSelf();
         FormExtraFieldIndexer::shouldReceive('setQuery')
-            ->with(['id' => $extraField->id])
+            ->with(['extra_field_id' => $extraField->id])
             ->once()
             ->andReturnSelf();
         FormExtraFieldIndexer::shouldReceive('index')
