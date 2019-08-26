@@ -231,7 +231,7 @@ class Creator
      * @param $type
      * @return mixed
      */
-    private function getExtraFieldTypeId($type)
+    protected function getExtraFieldTypeId($type)
     {
         return $this->extraFieldTypeIndexer
             ->setQuery(compact('type'))
@@ -243,7 +243,7 @@ class Creator
     /**
      * @return mixed
      */
-    private function getChannelId()
+    protected function getChannelId()
     {
         return $this->channelIndexer
             ->setQuery(['channel' => $this->channel])
@@ -255,7 +255,7 @@ class Creator
     /**
      * @return mixed
      */
-    private function getEntityId()
+    protected function getEntityId()
     {
         return $this->entityIndexer
             ->setQuery(['identification' => $this->entityIdentification])
@@ -271,7 +271,7 @@ class Creator
      * @param array $channels
      * @return mixed
      */
-    private function createOrGetForm(
+    protected function createOrGetForm(
         int $entityId,
         array $channels
     ) {
@@ -299,7 +299,7 @@ class Creator
      * @param int $extraFieldTypeId
      * @return mixed
      */
-    private function createOrGetExtraField(int $entityId, int $extraFieldTypeId)
+    protected function createOrGetExtraField(int $entityId, int $extraFieldTypeId)
     {
         $extraField = $this->extraFieldIndexer
             ->setQuery(["label" => $this->extraFieldLabel])
@@ -324,7 +324,7 @@ class Creator
      * @param int $extraFieldId
      * @return mixed
      */
-    private function createOrGetFormExtraField(int $formId, int $extraFieldId)
+    protected function createOrGetFormExtraField(int $formId, int $extraFieldId)
     {
         $formExtraField = $this->formExtraFieldIndexer
             ->setFormId($formId)
@@ -348,7 +348,7 @@ class Creator
      * @param int $formExtraFieldId
      * @param int $entityId
      */
-    private function createFieldMap(int $formExtraFieldId, int $entityId)
+    protected function createFieldMap(int $formExtraFieldId, int $entityId)
     {
         $this->fieldMapCreator
             ->setIdentification($this->fieldMapKey)
