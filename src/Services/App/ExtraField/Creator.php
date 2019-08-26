@@ -328,7 +328,7 @@ class Creator
     {
         $formExtraField = $this->formExtraFieldIndexer
             ->setFormId($formId)
-            ->setQuery(['id' => $extraFieldId])
+            ->setQuery(['extra_field_id' => $extraFieldId])
             ->index()
             ->last();
 
