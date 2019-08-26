@@ -41,39 +41,39 @@ class Creator
     /**
      * @var \Betalabs\LaravelHelper\Services\Engine\ExtraFieldType\Indexer
      */
-    private $extraFieldTypeIndexer;
+    protected $extraFieldTypeIndexer;
     /**
      * @var \Betalabs\LaravelHelper\Services\Engine\Channel\Indexer
      */
-    private $channelIndexer;
+    protected $channelIndexer;
     /**
      * @var \Betalabs\LaravelHelper\Services\Engine\Form\Indexer
      */
-    private $formIndexer;
+    protected $formIndexer;
     /**
      * @var \Betalabs\LaravelHelper\Services\Engine\Form\Creator
      */
-    private $formCreator;
+    protected $formCreator;
     /**
      * @var \Betalabs\LaravelHelper\Services\Engine\Entity\Indexer
      */
-    private $entityIndexer;
+    protected $entityIndexer;
     /**
      * @var \Betalabs\LaravelHelper\Services\Engine\ExtraField\Indexer
      */
-    private $extraFieldIndexer;
+    protected $extraFieldIndexer;
     /**
      * @var \Betalabs\LaravelHelper\Services\Engine\ExtraField\Creator
      */
-    private $extraFieldCreator;
+    protected $extraFieldCreator;
     /**
      * @var \Betalabs\LaravelHelper\Services\Engine\FormExtraField\Creator
      */
-    private $formExtraFieldCreator;
+    protected $formExtraFieldCreator;
     /**
      * @var \Betalabs\LaravelHelper\Services\Engine\FormExtraField\Indexer
      */
-    private $formExtraFieldIndexer;
+    protected $formExtraFieldIndexer;
     /**
      * @var string
      */
@@ -81,7 +81,7 @@ class Creator
     /**
      * @var \Betalabs\LaravelHelper\Services\Engine\FieldMap\Creator
      */
-    private $fieldMapCreator;
+    protected $fieldMapCreator;
     /**
      * @var int
      */
