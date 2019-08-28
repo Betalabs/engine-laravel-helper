@@ -90,6 +90,10 @@ class Creator
      * @var array
      */
     protected $options = [];
+    /**
+     * @var \Betalabs\LaravelHelper\Services\App\ExtraField\ExtraFieldFormFinder
+     */
+    private $extraFieldFormFinder;
 
     /**
      * Creator constructor.
@@ -103,6 +107,7 @@ class Creator
      * @param \Betalabs\LaravelHelper\Services\Engine\FormExtraField\Creator $formExtraFieldCreator
      * @param \Betalabs\LaravelHelper\Services\Engine\FormExtraField\Indexer $formExtraFieldIndexer
      * @param \Betalabs\LaravelHelper\Services\Engine\FieldMap\Creator $fieldMapCreator
+     * @param \Betalabs\LaravelHelper\Services\App\ExtraField\ExtraFieldFormFinder $extraFieldFormFinder
      */
     public function __construct(
         ExtraFieldTypeIndexer $extraFieldTypeIndexer,
@@ -114,7 +119,8 @@ class Creator
         ExtraFieldCreator $extraFieldCreator,
         FormExtraFieldCreator $formExtraFieldCreator,
         FormExtraFieldIndexer $formExtraFieldIndexer,
-        FieldMapCreator $fieldMapCreator
+        FieldMapCreator $fieldMapCreator,
+        ExtraFieldFormFinder $extraFieldFormFinder
     ) {
         $this->extraFieldTypeIndexer = $extraFieldTypeIndexer;
         $this->channelIndexer = $channelIndexer;
@@ -126,6 +132,7 @@ class Creator
         $this->formExtraFieldCreator = $formExtraFieldCreator;
         $this->formExtraFieldIndexer = $formExtraFieldIndexer;
         $this->fieldMapCreator = $fieldMapCreator;
+        $this->extraFieldFormFinder = $extraFieldFormFinder;
     }
 
 
@@ -222,7 +229,7 @@ class Creator
             [$channelId]
         );
         $extraFieldTypeId = $this->getExtraFieldTypeId($this->extraFieldType);
-        $extraField = $this->createOrGetExtraField($entityId, $extraFieldTypeId);
+        $extraField = $this->createOrGetExtraField($entityId, $extraFieldTypeId, $form);
         $formExtraField = $this->createOrGetFormExtraField($form->id, $extraField->id);
         $this->createFieldMap($formExtraField->id, $entityId);
     }
@@ -297,10 +304,15 @@ class Creator
      *
      * @param int $entityId
      * @param int $extraFieldTypeId
+     * @param $form
      * @return mixed
      */
-    protected function createOrGetExtraField(int $entityId, int $extraFieldTypeId)
+    protected function createOrGetExtraField(int $entityId, int $extraFieldTypeId, $form)
     {
+        if($extraField = $this->extraFieldFormFinder->findByLabel($form, $this->extraFieldLabel)) {
+            return $extraField;
+        }
+
         $extraField = $this->extraFieldIndexer
             ->setQuery(["label" => $this->extraFieldLabel])
             ->index()
