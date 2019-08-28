@@ -21,23 +21,23 @@ class Creator
     /**
      * @var string
      */
-    private $extraFieldType;
+    protected $extraFieldType;
     /**
      * @var string
      */
-    private $extraFieldLabel;
+    protected $extraFieldLabel;
     /**
      * @var string
      */
-    private $formName;
+    protected $formName;
     /**
      * @var string
      */
-    private $entityIdentification;
+    protected $entityIdentification;
     /**
      * @var string
      */
-    private $channel = 'ERP';
+    protected $channel = 'ERP';
     /**
      * @var \Betalabs\LaravelHelper\Services\Engine\ExtraFieldType\Indexer
      */
@@ -77,7 +77,7 @@ class Creator
     /**
      * @var string
      */
-    private $fieldMapKey;
+    protected $fieldMapKey;
     /**
      * @var \Betalabs\LaravelHelper\Services\Engine\FieldMap\Creator
      */
@@ -85,11 +85,11 @@ class Creator
     /**
      * @var int
      */
-    private $appRegistryId;
+    protected $appRegistryId;
     /**
      * @var array
      */
-    private $options = [];
+    protected $options = [];
 
     /**
      * Creator constructor.
