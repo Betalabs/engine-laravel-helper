@@ -286,7 +286,8 @@ class Creator
             ->setQuery([
                 'name' => $this->formName,
                 'entity' => $this->entityIdentification,
-                '_filter-approach' => 'and'
+                '_filter-approach' => 'and',
+                '_with' => 'extra_fields'
             ])
             ->index()
             ->first();

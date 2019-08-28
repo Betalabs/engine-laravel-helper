@@ -93,7 +93,8 @@ class ExtraFieldCreatorTest extends TestCase
             ->with([
                 'name' => $formName,
                 'entity' => $entityIdentification,
-                '_filter-approach' => 'and'
+                '_filter-approach' => 'and',
+                '_with' => 'extra_fields'
             ])
             ->andReturnSelf();
         FormIndexer::shouldReceive('index')
