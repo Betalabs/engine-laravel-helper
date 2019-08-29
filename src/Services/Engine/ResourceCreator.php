@@ -77,6 +77,7 @@ class ResourceCreator implements EngineResourceCreator
         try {
             $post = Request::post();
             $this->replaceEndpointParameters();
+            sleep(1);
             $response = $post->send($this->endpoint, $this->data);
         } catch (BadResponseException $e) {
             $post = $e;

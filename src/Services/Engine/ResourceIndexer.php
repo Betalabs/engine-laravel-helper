@@ -110,6 +110,7 @@ class ResourceIndexer implements EngineResourceIndexer
 
         $request = Request::get();
         $this->replaceEndpointParameters();
+        sleep(1);
         $index = $request->send("{$this->endpoint}?{$query}");
 
         $this->errors($request->getResponse());

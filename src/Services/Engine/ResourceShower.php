@@ -93,6 +93,7 @@ class ResourceShower implements EngineResourceShower
         $request = Request::get();
         $this->replaceEndpointParameters();
         $recordId = $this->recordId ?? "";
+        sleep(1);
         $record = $request->send("{$this->endpoint}/{$recordId}?{$query}");
 
         $this->errors($request->getResponse());

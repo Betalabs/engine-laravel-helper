@@ -93,6 +93,7 @@ class ResourceUpdater implements EngineResourceUpdater
             $put = Request::put();
             $this->replaceEndpointParameters();
             $recordId = $this->recordId ?? "";
+            sleep(1);
             $response = $put->send("{$this->endpoint}/{$recordId}", $this->data);
         } catch (BadResponseException $e) {
             $put = $e;
