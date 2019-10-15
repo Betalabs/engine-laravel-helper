@@ -110,11 +110,7 @@ class ResourceUpdater implements EngineResourceUpdater
      */
     protected function errors(ResponseInterface $response): void
     {
-        $status = $response->getStatusCode();
-        if ($status != Response::HTTP_CREATED
-            || $status != Response::HTTP_NO_CONTENT
-            || $status != Response::HTTP_OK
-        ) {
+        if ($response->getStatusCode() > 299) {
             throw new \RuntimeException($this->exceptionMessage);
         }
     }
