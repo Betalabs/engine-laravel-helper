@@ -13,7 +13,7 @@
     "php": ">=7.1.3",
     "laravel/passport": "^8.0",
     "myclabs/php-enum": "^1.5",
-    "betalabs/engine-phpsdk": "^0.6.0"
+    "betalabs/engine-phpsdk": "^0.7.0"
   },
   "require-dev": {
     "orchestra/testbench": "~3.0",
