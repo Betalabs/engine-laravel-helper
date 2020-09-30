@@ -9,9 +9,9 @@ use Laravel\Passport\Token;
 
 class CreatorTest extends TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
-        parent::setUp();
+        parent::setUp(): void;
 
         $this->artisan('passport:install');
         $this->artisan('passport:keys');

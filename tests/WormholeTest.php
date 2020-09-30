@@ -11,9 +11,9 @@ class WormholeTest extends TestCase
 {
     private $engineRegistry;
 
-    protected function setUp()
+    protected function setUp(): void
     {
-        parent::setUp();
+        parent::setUp(): void;
 
         $tenant = factory(Tenant::class)->create();
         Passport::actingAs($tenant);

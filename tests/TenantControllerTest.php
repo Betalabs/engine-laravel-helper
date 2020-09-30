@@ -13,9 +13,9 @@ use Laravel\Passport\Passport;
 
 class TenantControllerTest extends TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
-        parent::setUp();
+        parent::setUp(): void;
 
         Passport::actingAs(factory(Tenant::class)->create());
     }

@@ -10,9 +10,9 @@ use Laravel\Passport\PassportServiceProvider;
 
 abstract class TestCase extends \Orchestra\Testbench\TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
-        parent::setUp();
+        parent::setUp(): void;
 
         $databasePath = realpath(__DIR__ . '/../database/');
         $this->withFactories($databasePath . '/factories');

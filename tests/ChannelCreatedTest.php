@@ -11,9 +11,9 @@ class ChannelCreatedTest extends TestCase
 {
     private $tenant;
 
-    protected function setUp()
+    protected function setUp(): void
     {
-        parent::setUp();
+        parent::setUp(): void;
 
         $this->tenant = factory(Tenant::class)->create();
         Passport::actingAs($this->tenant);
