@@ -18,7 +18,7 @@ class UpdateTest extends TestCase
 {
     protected function setUp(): void
     {
-        parent::setUp(): void;
+        parent::setUp();
 
         Route::prefix('api')
             ->middleware('api')

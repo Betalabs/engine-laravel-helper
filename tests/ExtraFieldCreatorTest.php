@@ -23,7 +23,7 @@ class ExtraFieldCreatorTest extends TestCase
 
     protected function setUp(): void
     {
-        parent::setUp(): void;
+        parent::setUp();
         $this->tenant = factory(Tenant::class)->create();
         Passport::actingAs($this->tenant);
     }

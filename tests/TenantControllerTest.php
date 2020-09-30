@@ -15,7 +15,7 @@ class TenantControllerTest extends TestCase
 {
     protected function setUp(): void
     {
-        parent::setUp(): void;
+        parent::setUp();
 
         Passport::actingAs(factory(Tenant::class)->create());
     }

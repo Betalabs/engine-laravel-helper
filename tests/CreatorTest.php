@@ -11,7 +11,7 @@ class CreatorTest extends TestCase
 {
     protected function setUp(): void
     {
-        parent::setUp(): void;
+        parent::setUp();
 
         $this->artisan('passport:install');
         $this->artisan('passport:keys');

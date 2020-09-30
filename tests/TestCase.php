@@ -12,7 +12,7 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
 {
     protected function setUp(): void
     {
-        parent::setUp(): void;
+        parent::setUp();
 
         $databasePath = realpath(__DIR__ . '/../database/');
         $this->withFactories($databasePath . '/factories');

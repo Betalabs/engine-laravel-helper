@@ -13,7 +13,7 @@ class WormholeTest extends TestCase
 
     protected function setUp(): void
     {
-        parent::setUp(): void;
+        parent::setUp();
 
         $tenant = factory(Tenant::class)->create();
         Passport::actingAs($tenant);
