@@ -23,6 +23,12 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
     protected function getEnvironmentSetUp($app)
     {
         $app['config']->set('database.default', 'testing');
+        $app['config']->set('database.connections.testing', [
+            'driver'   => 'mysql',
+            'database' => 'testing',
+            'username'   => 'root',
+            'password'   => 'root',
+        ]);
     }
 
     protected function getPackageProviders($app)
