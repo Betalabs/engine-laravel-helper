@@ -27,7 +27,7 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
             'driver'   => 'mysql',
             'host' => 'mysql',
             'port' => '3306',
-            'database' => 'testing',
+            'database' => 'test',
             'username'   => 'root',
             'password'   => 'root',
         ]);
