@@ -17,7 +17,6 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
         $databasePath = realpath(__DIR__ . '/../database/');
         $this->withFactories($databasePath . '/factories');
         $this->loadMigrationsFrom($databasePath . '/migrations');
-        dd(config('database.default.testing'));
         $this->artisan('migrate', ['--database' => 'testing']);
     }
 
