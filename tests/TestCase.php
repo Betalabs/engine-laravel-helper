@@ -24,12 +24,8 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
     {
         $app['config']->set('database.default', 'testing');
         $app['config']->set('database.connections.testing', [
-            'driver'   => 'mysql',
-            'host' => 'mysql',
-            'port' => '3306',
-            'database' => 'test',
-            'username'   => 'root',
-            'password'   => 'root',
+            'driver'   => 'sqlite',
+            'database' => ':memory:',
         ]);
     }
 
