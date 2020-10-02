@@ -14,15 +14,10 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
     {
         parent::setUp();
 
-        dump(1);
         $databasePath = realpath(__DIR__ . '/../database/');
-        dump(2);
         $this->withFactories($databasePath . '/factories');
-        dump(3);
         $this->loadMigrationsFrom($databasePath . '/migrations');
-        dump(4);
         $this->artisan('migrate', ['--database' => 'testing']);
-        dump(5);
     }
 
     protected function getEnvironmentSetUp($app)
