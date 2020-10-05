@@ -33,7 +33,12 @@ class CreateEngineExtraFieldsTable extends Migration
      *
      * @return void
      */
-    public function down() {
+    public function down()
+    {
+        if(\App::environment('testing') && config('database.default') == 'sqlite') {
+            return;
+        }
+
         Schema::table('engine_extra_fields', function (Blueprint $table) {
             $table->dropForeign(['tenant_id']);
         });

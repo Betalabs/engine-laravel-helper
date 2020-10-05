@@ -18,18 +18,32 @@ class FactoryTest extends TestCase
             'tenant_id' => $tenant->id
         ]);
 
-        $this->assertDatabaseHas('tenants', $tenant->toArray());
+        $this->assertDatabaseHas('tenants', [
+            'name' => $tenant->name,
+            'email' => $tenant->email,
+        ]);
         $this->assertDatabaseHas(
             'engine_registries',
-            $engineRegistry->toArray()
+            [
+                'tenant_id' => $engineRegistry->tenant_id,
+                'registry_id' => $engineRegistry->registry_id,
+                'api_base_uri' => $engineRegistry->api_base_uri,
+                'api_access_token' => $engineRegistry->api_access_token,
+            ]
         );
         $this->assertDatabaseHas(
             'engine_virtual_entities',
-            $virtualEntity->toArray()
+            [
+                'tenant_id' => $virtualEntity->tenant_id,
+                'code' => $virtualEntity->code,
+                'type_id' => $virtualEntity->type_id,
+            ]
         );
         $this->assertDatabaseHas(
             'engine_virtual_entity_types',
-            $virtualEntity->engineVirtualEntityType->toArray()
+            [
+                'name' => $virtualEntity->engineVirtualEntityType->name
+            ]
         );
     }
 }

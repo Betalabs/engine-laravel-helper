@@ -2,9 +2,9 @@
 
 namespace Betalabs\LaravelHelper\Http\Resources;
 
-use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class Tenant extends Resource
+class Tenant extends JsonResource
 {
     /**
      * Transform the resource into an array.

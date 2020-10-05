@@ -13,7 +13,7 @@ use Laravel\Passport\Passport;
 
 class TenantControllerTest extends TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

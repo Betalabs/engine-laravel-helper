@@ -27,6 +27,10 @@ class CreateEngineVirtualEntityTypesTable extends Migration
      */
     public function down()
     {
+        if(\App::environment('testing') && config('database.default') == 'sqlite') {
+            return;
+        }
+
         Schema::dropIfExists('engine_virtual_entity_types');
     }
 }

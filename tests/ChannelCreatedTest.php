@@ -11,7 +11,7 @@ class ChannelCreatedTest extends TestCase
 {
     private $tenant;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -27,7 +27,7 @@ class ChannelCreatedTest extends TestCase
         event(new ChannelCreated($response, $this->tenant));
         $this->assertDatabaseHas('engine_channels', [
             'code' => $response->id,
-            'slug' => str_slug($response->channel),
+            'slug' => \Str::slug($response->channel),
             'tenant_id' => $this->tenant->id
         ]);
     }

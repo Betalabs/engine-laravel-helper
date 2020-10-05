@@ -13,7 +13,7 @@ class VirtualEntityTest extends TestCase
 {
     private $tenant;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

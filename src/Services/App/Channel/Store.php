@@ -46,7 +46,7 @@ class Store
      */
     public function setSlug(string $slug): Store
     {
-        $this->slug = str_slug($slug);
+        $this->slug = \Str::slug($slug);
         return $this;
     }
 

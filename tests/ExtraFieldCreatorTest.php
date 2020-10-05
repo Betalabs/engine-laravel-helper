@@ -21,7 +21,7 @@ class ExtraFieldCreatorTest extends TestCase
 {
     private $tenant;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->tenant = factory(Tenant::class)->create();
@@ -159,7 +159,7 @@ class ExtraFieldCreatorTest extends TestCase
         $extraField = new \stdClass();
         $extraField->id = 12;
         $extraField->label = $extraFieldLabel;
-        $extraField->slug = str_slug($extraFieldLabel);
+        $extraField->slug = \Str::slug($extraFieldLabel);
         ExtraFieldCreator::shouldReceive('setEntityId')
             ->with($entity->id)
             ->andReturnSelf();

@@ -10,7 +10,7 @@ use Laravel\Passport\PassportServiceProvider;
 
 abstract class TestCase extends \Orchestra\Testbench\TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -22,7 +22,7 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
 
     protected function getEnvironmentSetUp($app)
     {
-        $app['config']->set('database.default', 'testing');
+        $app['config']->set('database.default', 'sqlite');
     }
 
     protected function getPackageProviders($app)
