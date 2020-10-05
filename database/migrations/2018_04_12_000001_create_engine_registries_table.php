@@ -34,6 +34,10 @@ class CreateEngineRegistriesTable extends Migration
      */
     public function down()
     {
+        if(\App::environment('testing') && config('database.default') == 'sqlite') {
+            return;
+        }
+
         Schema::table('engine_registries', function (Blueprint $table) {
             $table->dropForeign(['tenant_id']);
         });

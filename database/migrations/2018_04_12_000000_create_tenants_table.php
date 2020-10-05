@@ -29,6 +29,9 @@ class CreateTenantsTable extends Migration
      */
     public function down()
     {
+        if(\App::environment('testing') && config('database.default') == 'sqlite') {
+            return;
+        }
         Schema::dropIfExists('tenants');
     }
 }

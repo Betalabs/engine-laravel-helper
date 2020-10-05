@@ -46,8 +46,7 @@ class AppControllerTest extends TestCase
             ->getMock();
         $service->expects($this->once())
             ->method('setAppData')
-            ->with($this->isType('array'))
-            ->willReturn(null);
+            ->with($this->isType('array'));
         $service->expects($this->once())
             ->method('registration')
             ->willReturn(factory(Tenant::class)->make());

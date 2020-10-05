@@ -34,6 +34,10 @@ class CreateEngineChannelsTable extends Migration
      */
     public function down()
     {
+        if(\App::environment('testing') && config('database.default') == 'sqlite') {
+            return;
+        }
+
         Schema::table('engine_channels', function (Blueprint $table) {
             $table->dropForeign(['tenant_id']);
         });

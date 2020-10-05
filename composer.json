@@ -14,7 +14,8 @@
     "laravel/passport": "^10.0",
     "myclabs/php-enum": "^1.5",
     "betalabs/engine-phpsdk": "^1.1",
-    "laravel/legacy-factories": "^1.0"
+    "laravel/legacy-factories": "^1.0",
+    "doctrine/dbal": "^2.11"
   },
   "require-dev": {
     "orchestra/testbench": "^6.2",

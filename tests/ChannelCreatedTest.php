@@ -27,7 +27,7 @@ class ChannelCreatedTest extends TestCase
         event(new ChannelCreated($response, $this->tenant));
         $this->assertDatabaseHas('engine_channels', [
             'code' => $response->id,
-            'slug' => str_slug($response->channel),
+            'slug' => \Str::slug($response->channel),
             'tenant_id' => $this->tenant->id
         ]);
     }

@@ -159,7 +159,7 @@ class ExtraFieldCreatorTest extends TestCase
         $extraField = new \stdClass();
         $extraField->id = 12;
         $extraField->label = $extraFieldLabel;
-        $extraField->slug = str_slug($extraFieldLabel);
+        $extraField->slug = \Str::slug($extraFieldLabel);
         ExtraFieldCreator::shouldReceive('setEntityId')
             ->with($entity->id)
             ->andReturnSelf();
