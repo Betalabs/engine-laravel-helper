@@ -53,6 +53,9 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+# Composer
+composer.lock
+
 ### PhpStorm Patch ###
 # Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
 
