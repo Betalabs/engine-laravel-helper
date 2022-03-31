@@ -15,7 +15,7 @@
     "myclabs/php-enum": "^1.5",
     "betalabs/engine-phpsdk": "^1.2",
     "laravel/legacy-factories": "^1.0",
-    "doctrine/dbal": "^2.11"
+    "doctrine/dbal": "^2.11|^3.0"
   },
   "require-dev": {
     "orchestra/testbench": "^6.2",
