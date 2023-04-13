@@ -10,10 +10,10 @@
     }
   ],
   "require": {
-    "php": "^7.3",
+    "php": "^8.0",
     "laravel/passport": "^10.0",
     "myclabs/php-enum": "^1.5",
-    "betalabs/engine-phpsdk": "^1.2",
+    "betalabs/engine-phpsdk": "^2.0",
     "laravel/legacy-factories": "^1.0",
     "doctrine/dbal": "^2.11|^3.0"
   },
