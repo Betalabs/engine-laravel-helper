@@ -13,7 +13,7 @@
     "php": "^8.0",
     "laravel/passport": "^10.0",
     "myclabs/php-enum": "^1.5",
-    "betalabs/engine-phpsdk": "^2.0",
+    "betalabs/engine-phpsdk": "^2.0.0",
     "laravel/legacy-factories": "^1.0",
     "doctrine/dbal": "^2.11|^3.0"
   },
