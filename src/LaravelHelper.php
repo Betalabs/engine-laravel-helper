@@ -26,5 +26,10 @@ class LaravelHelper
             ->middleware('api')
             ->namespace(self::$namespace)
             ->group(base_path('routes/base.php'));
+
+        Route::middleware('web')
+            ->namespace(self::$namespace)
+            ->group(base_path('routes/base-web.php'));
+
     }
 }

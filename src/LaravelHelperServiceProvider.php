@@ -133,6 +133,10 @@ class LaravelHelperServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(realpath(__DIR__ . '/../translations'), 'engine-laravel-helper');
 
         $this->publishes([
+            realpath(__DIR__ . '/../src/resources/lang/pt/app/Structure/') => base_path('resources/lang/pt/app/Structure'),
+            realpath(__DIR__ . '/../src/Structure/Menu') => base_path('app/Structures/Menu'),
+            realpath(__DIR__ . '/../src/Http/Controllers/BaseControllers') => base_path('app/Http/Controllers'),
+
             realpath(__DIR__ . '/../database') => base_path('database'),
             realpath(__DIR__ . '/../routes') => base_path('routes'),
             realpath(__DIR__ . '/../translations') => base_path('lang/vendor/engine-laravel-helper'),
