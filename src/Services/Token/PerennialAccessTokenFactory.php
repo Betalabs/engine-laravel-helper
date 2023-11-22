@@ -4,7 +4,7 @@ namespace Betalabs\LaravelHelper\Services\Token;
 
 
 use Laravel\Passport\PersonalAccessTokenFactory;
-use Zend\Diactoros\ServerRequest;
+use Laminas\Diactoros\ServerRequest;
 
 class PerennialAccessTokenFactory extends PersonalAccessTokenFactory
 {
@@ -12,7 +12,7 @@ class PerennialAccessTokenFactory extends PersonalAccessTokenFactory
      * @param \Laravel\Passport\Client $client
      * @param mixed $userId
      * @param array $scopes
-     * @return \Zend\Diactoros\ServerRequest
+     * @return \Laminas\Diactoros\ServerRequest
      */
     protected function createRequest($client, $userId, array $scopes)
     {
