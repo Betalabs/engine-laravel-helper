@@ -2,7 +2,6 @@
 
 namespace Betalabs\LaravelHelper\Helpers;
 
-
 use Betalabs\LaravelHelper\Models\Enums\NotificationLevel;
 use Betalabs\LaravelHelper\Services\App\EngineSdkAuth;
 use Betalabs\LaravelHelper\Services\Engine\Notifications\Creator;
@@ -11,26 +10,14 @@ use Illuminate\Support\Facades\Auth;
 class Notification
 {
     /**
-     * @var \Betalabs\LaravelHelper\Services\App\EngineSdkAuth
-     */
-    private $engineSdkAuth;
-    /**
-     * @var \Betalabs\LaravelHelper\Services\Engine\Notifications\Creator
-     */
-    private $creator;
-
-    /**
      * Notification constructor.
-     * @param \Betalabs\LaravelHelper\Services\App\EngineSdkAuth $engineSdkAuth
-     * @param \Betalabs\LaravelHelper\Services\Engine\Notifications\Creator $creator
+     * @param EngineSdkAuth $engineSdkAuth
+     * @param Creator $creator
      */
     public function __construct(
-        EngineSdkAuth $engineSdkAuth,
-        Creator $creator
-    ) {
-        $this->engineSdkAuth = $engineSdkAuth;
-        $this->creator = $creator;
-    }
+        private EngineSdkAuth $engineSdkAuth,
+        private Creator $creator
+    ) { }
 
     /**
      * Send an info notification to Engine.
