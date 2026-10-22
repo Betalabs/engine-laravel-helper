@@ -14,18 +14,23 @@ class EngineCreatorTest extends TestCase
 
         $data = ['channel' => 'testChannel'];
         ResourceCreator::shouldReceive('setData')
+            ->once()
             ->with($data)
             ->andReturnSelf();
         ResourceCreator::shouldReceive('setEndpoint')
+            ->once()
             ->with('channels')
             ->andReturnSelf();
         ResourceCreator::shouldReceive('setEndpointParameters')
+            ->once()
             ->with([])
             ->andReturnSelf();
         ResourceCreator::shouldReceive('setExceptionMessage')
+            ->once()
             ->with('Não foi possível criar o canal.')
             ->andReturnSelf();
         ResourceCreator::shouldReceive('create')
+            ->once()
             ->andReturn(null);
 
         /** @var \Betalabs\LaravelHelper\Services\Engine\GenericCreator $creator **/
@@ -45,18 +50,23 @@ class EngineCreatorTest extends TestCase
         $data = ['extra_field_id' => $extraFieldId];
 
         ResourceCreator::shouldReceive('setData')
+            ->once()
             ->with($data)
             ->andReturnSelf();
         ResourceCreator::shouldReceive('setEndpoint')
+            ->once()
             ->with('forms/{formId}/extra-fields')
             ->andReturnSelf();
         ResourceCreator::shouldReceive('setEndpointParameters')
+            ->once()
             ->with(['formId' => $formId])
             ->andReturnSelf();
         ResourceCreator::shouldReceive('setExceptionMessage')
+            ->once()
             ->with('Não foi possível criar a associação de formulário com o campo extra.')
             ->andReturnSelf();
         ResourceCreator::shouldReceive('create')
+            ->once()
             ->andReturn(null);
 
         /** @var \Betalabs\LaravelHelper\Services\Engine\GenericCreator $creator **/

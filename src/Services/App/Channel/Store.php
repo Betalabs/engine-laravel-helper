@@ -4,6 +4,7 @@ namespace Betalabs\LaravelHelper\Services\App\Channel;
 
 
 use Betalabs\LaravelHelper\Models\EngineChannel;
+use Illuminate\Support\Str;
 
 class Store
 {
@@ -46,7 +47,7 @@ class Store
      */
     public function setSlug(string $slug): Store
     {
-        $this->slug = \Str::slug($slug);
+        $this->slug = Str::slug($slug);
         return $this;
     }
 

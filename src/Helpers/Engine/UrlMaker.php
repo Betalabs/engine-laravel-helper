@@ -9,7 +9,7 @@ class UrlMaker
     /**
      * Make a valid Engine API URL
      *
-     * @param null|string $endpoint
+     * @param string $endpoint
      *
      * @return string
      */

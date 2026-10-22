@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * @property int registry_id
+ * @property int $registry_id
  * @method static bySlug(string $string)
  */
 class EngineRegistry extends Model

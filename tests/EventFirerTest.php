@@ -19,18 +19,23 @@ class EventFirerTest extends TestCase
         ];
 
         ResourceCreator::shouldReceive('setData')
+            ->once()
             ->with($data)
             ->andReturnSelf();
         ResourceCreator::shouldReceive('setEndpoint')
+            ->once()
             ->with('events/fire')
             ->andReturnSelf();
         ResourceCreator::shouldReceive('setEndpointParameters')
+            ->once()
             ->with([])
             ->andReturnSelf();
         ResourceCreator::shouldReceive('setExceptionMessage')
+            ->once()
             ->with('Não foi possível acionar o evento.')
             ->andReturnSelf();
         ResourceCreator::shouldReceive('create')
+            ->once()
             ->andReturn(null);
 
         /**@var \Betalabs\LaravelHelper\Services\Engine\Event\Firer $firer**/

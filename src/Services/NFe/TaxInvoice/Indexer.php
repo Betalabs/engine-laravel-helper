@@ -19,8 +19,14 @@ class Indexer extends AbstractIndexer
 
     public function index()
     {
+        // bySlug() already returns the model; when the slug does not exist
+        // Eloquent returns the query builder instead
+        $nfeRegistry = EngineRegistry::bySlug('nfe');
+
         $this->engineResourceIndexer->setEndpointParameters([
-            'registryId' => EngineRegistry::bySlug('nfe')->first()->registry_id ?? $this->registryId
+            'registryId' => $nfeRegistry instanceof EngineRegistry
+                ? $nfeRegistry->registry_id
+                : $this->registryId
         ]);
         return parent::index();
     }

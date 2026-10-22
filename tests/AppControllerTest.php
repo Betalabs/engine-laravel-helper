@@ -23,26 +23,23 @@ class AppControllerTest extends TestCase
         $this->assertArrayHasKey('email', $tenant);
     }
 
+    /**
+     * Real request with the payload: PHPUnit 12 can no longer double
+     * FormRequest classes (they have a method named "method")
+     */
     private function mockRequest()
     {
-        $request = $this->getMockBuilder(RegisterRequest::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['input'])
-            ->getMock();
-        $request->expects($this->once())
-            ->method('input')
-            ->willReturn([
-                'tenant' => factory(Tenant::class)->raw(),
-                'engine_registry' => factory(EngineRegistry::class)->raw(),
-            ]);
-        return $request;
+        return RegisterRequest::create('/apps/genesis', 'POST', [
+            'tenant' => factory(Tenant::class)->raw(),
+            'engine_registry' => factory(EngineRegistry::class)->raw(),
+        ]);
     }
 
     private function mockRegisterService()
     {
         $service = $this->getMockBuilder(Register::class)
             ->disableOriginalConstructor()
-            ->setMethods(['setAppData', 'registration'])
+            ->onlyMethods(['setAppData', 'registration'])
             ->getMock();
         $service->expects($this->once())
             ->method('setAppData')

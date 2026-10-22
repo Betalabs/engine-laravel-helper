@@ -15,24 +15,27 @@ class EngineShowerTest extends TestCase
 
         $recordId = 1;
         ResourceShower::shouldReceive('setQuery')
-            ->with([])
-            ->andReturnSelf();
-        ResourceShower::shouldReceive('setEndpointParameters')
+            ->once()
             ->with([])
             ->andReturnSelf();
         ResourceShower::shouldReceive('setEndpoint')
+            ->once()
             ->with('virtual-entities/{virtualEntity}/records')
             ->andReturnSelf();
         ResourceShower::shouldReceive('setEndpointParameters')
+            ->once()
             ->with(['virtualEntity' => 1])
             ->andReturnSelf();
         ResourceShower::shouldReceive('setRecordId')
+            ->once()
             ->with($recordId)
             ->andReturnSelf();
         ResourceShower::shouldReceive('setExceptionMessage')
+            ->once()
             ->with('Não foi possível buscar o(s) registro(s) de entidade(s) virtuais.')
             ->andReturnSelf();
         ResourceShower::shouldReceive('retrieve')
+            ->once()
             ->andReturn(collect([]));
 
         /**@var \Betalabs\LaravelHelper\Services\Engine\GenericShower $shower **/
