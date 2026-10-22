@@ -32,7 +32,7 @@ class TenantControllerTest extends TestCase
 
     public function testUpdate()
     {
-        $this->artisan('passport:install');
+        $this->createPassportPersonalClient();
 
         factory(EngineRegistry::class)->create(['tenant_id' => Auth::id()]);
 
@@ -52,22 +52,17 @@ class TenantControllerTest extends TestCase
         $this->assertEquals('engineToken', EngineRegistry::bySlug('engine')->api_access_token);
     }
 
+    /**
+     * Real request with the payload: PHPUnit 12 can no longer double
+     * FormRequest classes (they have a method named "method")
+     */
     private function mockRequest()
     {
-        $request = $this->getMockBuilder(UpdateTenant::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['input'])
-            ->getMock();
-        $request->expects($this->once())
-            ->method('input')
-            ->willReturn(
-                array_merge(
-                    factory(Tenant::class)->raw(),
-                    [
-                        'engine_api_access_token' => 'engineToken'
-                    ]
-                )
-            );
-        return $request;
+        return UpdateTenant::create('/tenants', 'PUT', array_merge(
+            factory(Tenant::class)->raw(),
+            [
+                'engine_api_access_token' => 'engineToken'
+            ]
+        ));
     }
 }

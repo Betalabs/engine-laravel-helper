@@ -11,7 +11,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Container\Container;
 
 /**
- * @property \Betalabs\LaravelHelper\Models\EngineRegistry engineRegistry
+ * @property \Betalabs\LaravelHelper\Models\EngineRegistry $engineRegistry
  */
 class Tenant extends Authenticatable
 {

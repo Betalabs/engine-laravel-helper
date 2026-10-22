@@ -19,6 +19,8 @@ class Tenant implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
-        $builder->where('tenant_id', Auth::id());
+        // Qualificado pela tabela: em consultas com JOIN (ex.: listagens com
+        // _fields=orders->code) o `tenant_id` sozinho e ambiguo no MySQL.
+        $builder->where($model->getTable() . '.tenant_id', Auth::id());
     }
 }

@@ -13,8 +13,7 @@ class CreatorTest extends TestCase
     {
         parent::setUp();
 
-        $this->artisan('passport:install');
-        $this->artisan('passport:keys');
+        $this->createPassportPersonalClient();
     }
 
     public function testCreate()

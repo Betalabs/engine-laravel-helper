@@ -17,7 +17,7 @@ class UpdateAccessTokensTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->artisan('passport:install');
+        $this->createPassportPersonalClient();
         $this->tenant = factory(Tenant::class)->create();
         factory(EngineRegistry::class)->create(['tenant_id' => $this->tenant->id]);
         $this->token = $this->tenant->createToken("{$this->tenant->name} token");

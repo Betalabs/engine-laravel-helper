@@ -24,6 +24,7 @@ class EngineSdkAuthTest extends TestCase
     public function testEngineSdkAuth()
     {
         Token::shouldReceive('informToken')
+            ->once()
             ->with($this->tenant->engineRegistry->api_access_token);
 
         $engineSdkAuth = resolve(EngineSdkAuth::class);

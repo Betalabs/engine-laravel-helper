@@ -28,7 +28,14 @@ class Updater
     private function saveEngineToken(Authenticatable $authenticatable, $input)
     {
         if(!empty($input['engine_api_access_token'])) {
-            $engineRegistry = EngineRegistry::bySlug('engine')->first();
+            // bySlug() already returns the model; when the slug does not
+            // exist Eloquent returns the query builder instead
+            $engineRegistry = EngineRegistry::bySlug('engine');
+
+            if (!$engineRegistry instanceof EngineRegistry) {
+                throw new \RuntimeException('Engine registry (slug "engine") not found for the tenant');
+            }
+
             $engineRegistry->api_access_token = $input['engine_api_access_token'];
             $engineRegistry->save();
         }

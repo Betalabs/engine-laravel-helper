@@ -1,15 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Betalabs\LaravelHelper\Http\Controllers\HealthCheckController;
+use Betalabs\LaravelHelper\Http\Controllers\AppController;
 
-Route::middleware('auth:api')->group(function () {
-    Route::get('/tenants', 'TenantController@show');
-    Route::put('/tenants', 'TenantController@update');
-
-    //Configurations
-    Route::get('/configurations', 'ConfigurationController@index');
-    Route::get('/configurations/{featureId}', 'ConfigurationController@show');
-    Route::put('/configurations/{featureId}', 'ConfigurationController@update');
-});
-
-Route::post('/apps/genesis', 'AppController@register');
+Route::post('/apps/genesis',  [AppController::class, 'register']);
+Route::get('/health-check', [HealthCheckController::class, 'check']);

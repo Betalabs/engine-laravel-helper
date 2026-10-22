@@ -23,7 +23,7 @@ class UpdateTest extends TestCase
         Route::prefix('api')
             ->middleware('api')
             ->namespace('\Betalabs\LaravelHelper\Http\Controllers')
-            ->group('routes/base.php');
+            ->group(__DIR__ . '/../../../routes/api.php');
         Passport::actingAs(factory(Tenant::class)->create());
     }
 

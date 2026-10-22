@@ -45,7 +45,7 @@ class RegisterTest extends TestCase
     {
         $creator = $this->getMockBuilder(Creator::class)
             ->disableOriginalConstructor()
-            ->setMethods(['setData', 'create'])
+            ->onlyMethods(['setData', 'create'])
             ->getMock();
         $creator->expects($this->once())
             ->method('setData')
