@@ -93,6 +93,7 @@ $ php artisan app:deploy
 - Fixed: updating the tenant with `engine_api_access_token` now always saves the token in the `engine` registry, even when the tenant has other registries (previously the first registry of the tenant was updated). If the tenant has no `engine` registry a `RuntimeException` is thrown.
 - Fixed: `NFe\TaxInvoice\Indexer` now uses the `nfe` registry when the tenant has it (previously the first registry of the tenant was used); without it, the registry informed by `setRegistryId()` is used, as before.
 - Fixed: `Models\Enums\WorkflowConditionOperator` had a syntax error and could not be loaded.
+- Fixed (6.0.2, same fix as 3.0.2): the tenant global scope (`Scopes\Tenant` and the `Models\BelongsToTenant` trait) qualifies `tenant_id` with the table name, so queries joining two tables that have a `tenant_id` column are no longer rejected as ambiguous.
 
 ## Testing
 

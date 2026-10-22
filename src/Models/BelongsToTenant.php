@@ -17,7 +17,9 @@ trait BelongsToTenant
 
         static::addGlobalScope('tenant', function(Builder $builder) {
             if(\Auth::check()) {
-                $builder->where('tenant_id', \Auth::id());
+                // Qualificado pela tabela, como em Scopes\Tenant: com JOIN o
+                // `tenant_id` sozinho e ambiguo no MySQL.
+                $builder->where($builder->qualifyColumn('tenant_id'), \Auth::id());
             }
         });
     }
